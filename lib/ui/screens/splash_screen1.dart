@@ -6,6 +6,7 @@ class Splash1Screen extends StatefulWidget {
   const Splash1Screen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _Splash1ScreenState createState() => _Splash1ScreenState();
 }
 

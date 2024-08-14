@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:retsept_cherno/ui/widgets/recipe_card.dart';
 
+// ignore: use_key_in_widget_constructors
 class PeaAndRicotta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class PeaAndRicotta extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0),
               ),
-              content: Container(
+              content: SizedBox(
                 width: double.maxFinite,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -26,7 +26,7 @@ class PeaAndRicotta extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('Cancel'),
+                          child: const Text('Cancel'),
                         ),
                         TextButton(
                           onPressed: () {
@@ -34,16 +34,16 @@ class PeaAndRicotta extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return RecipeCard();
+                                  return const RecipeCard();
                                 },
                               ),
                             );
                           },
-                          child: Text('View More'),
+                          child: const Text('View More'),
                         ),
                       ],
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     Container(
                       width: 200,
                       height: 50,
@@ -51,7 +51,7 @@ class PeaAndRicotta extends StatelessWidget {
                         color: Colors.blue,
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Perfect homemade pancake',
                         style: TextStyle(
                           color: Colors.white,
@@ -60,7 +60,7 @@ class PeaAndRicotta extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -70,7 +70,7 @@ class PeaAndRicotta extends StatelessWidget {
                         _buildInfoChip(Icons.timer, '48 Min'),
                       ],
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -100,7 +100,7 @@ class PeaAndRicotta extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
+              SizedBox(
                 width: 150.0,
                 height: 230.0,
                 child: Stack(
@@ -118,13 +118,13 @@ class PeaAndRicotta extends StatelessWidget {
                       top: 8.0,
                       left: 8.0,
                       child: Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             horizontal: 6.0, vertical: 2.0),
                         decoration: BoxDecoration(
                           color: Colors.grey.withOpacity(0.7),
                           borderRadius: BorderRadius.circular(4.0),
                         ),
-                        child: Row(
+                        child: const Row(
                           children: [
                             Icon(Icons.star, color: Colors.yellow, size: 12.0),
                             SizedBox(width: 4.0),
@@ -139,7 +139,7 @@ class PeaAndRicotta extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom: 8.0,
                       left: 8.0,
                       child: Row(
@@ -170,37 +170,37 @@ class PeaAndRicotta extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 16.0),
+              const SizedBox(width: 16.0),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Pea and Ricotta Omelets',
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8.0),
+                    const SizedBox(height: 8.0),
                     Row(
                       children: [
-                        CircleAvatar(
+                        const CircleAvatar(
                           backgroundImage: AssetImage(
                               'assets/chef3.png'), // Replace with your actual image asset
                           radius: 20.0,
                         ),
-                        SizedBox(width: 8.0),
-                        Text('Dave Robert'),
-                        SizedBox(width: 8.0),
+                        const SizedBox(width: 8.0),
+                        const Text('Dave Robert'),
+                        const SizedBox(width: 8.0),
                         Container(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 6.0, vertical: 2.0),
                           decoration: BoxDecoration(
                             color: Colors.yellow,
                             borderRadius: BorderRadius.circular(4.0),
                           ),
-                          child: Row(
+                          child: const Row(
                             children: [
                               Icon(Icons.star, color: Colors.black, size: 12.0),
                               SizedBox(width: 4.0),
@@ -216,8 +216,8 @@ class PeaAndRicotta extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 8.0),
-                    Text(
+                    const SizedBox(height: 8.0),
+                    const Text(
                       'In a large bowl, mix together flour, baking powder, sugar, and salt...',
                       style: TextStyle(fontSize: 16.0),
                     ),

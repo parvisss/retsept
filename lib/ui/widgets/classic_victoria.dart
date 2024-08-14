@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:retsept_cherno/ui/widgets/recipe_card.dart';
 
 class ClassicVictoria extends StatelessWidget {
+  const ClassicVictoria({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -14,7 +15,7 @@ class ClassicVictoria extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0),
               ),
-              content: Container(
+              content: SizedBox(
                 width: double.maxFinite,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -26,7 +27,7 @@ class ClassicVictoria extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('Cancel'),
+                          child: const Text('Cancel'),
                         ),
                         TextButton(
                           onPressed: () {
@@ -40,11 +41,11 @@ class ClassicVictoria extends StatelessWidget {
                             );
 // Bu yerda nom to'g'irlandi
                           },
-                          child: Text('View More'),
+                          child: const Text('View More'),
                         ),
                       ],
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     Container(
                       width: 200,
                       height: 50,
@@ -52,7 +53,7 @@ class ClassicVictoria extends StatelessWidget {
                         color: Colors.blue,
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      child: Text(
+                      child: const Text(
                         'Perfect homemade pancake',
                         style: TextStyle(
                           color: Colors.white,
@@ -61,7 +62,7 @@ class ClassicVictoria extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -71,7 +72,7 @@ class ClassicVictoria extends StatelessWidget {
                         _buildInfoChip(Icons.timer, '48 Min'),
                       ],
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -119,13 +120,13 @@ class ClassicVictoria extends StatelessWidget {
                       top: 8.0,
                       left: 8.0,
                       child: Container(
-                        padding: EdgeInsets.symmetric(
+                        padding: const EdgeInsets.symmetric(
                             horizontal: 6.0, vertical: 2.0),
                         decoration: BoxDecoration(
                           color: Colors.grey.withOpacity(0.7),
                           borderRadius: BorderRadius.circular(4.0),
                         ),
-                        child: Row(
+                        child: const Row(
                           children: [
                             Icon(Icons.star, color: Colors.yellow, size: 12.0),
                             SizedBox(width: 4.0),
@@ -140,7 +141,7 @@ class ClassicVictoria extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
+                    const Positioned(
                       bottom: 8.0,
                       left: 8.0,
                       child: Row(
@@ -171,36 +172,36 @@ class ClassicVictoria extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: 16.0),
+              const SizedBox(width: 16.0),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Classic Victoria sandwich recip...',
                       style: TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 8.0),
+                    const SizedBox(height: 8.0),
                     Row(
                       children: [
-                        CircleAvatar(
+                        const CircleAvatar(
                           backgroundImage: AssetImage(
                               'assets/chef2.png'), // Replace with your actual image asset
                           radius: 20.0,
                         ),
-                        Text('Rick Dolynsky'),
-                        SizedBox(width: 8.0),
+                        const Text('Rick Dolynsky'),
+                        const SizedBox(width: 8.0),
                         Container(
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 6.0, vertical: 2.0),
                           decoration: BoxDecoration(
                             color: Colors.yellow,
                             borderRadius: BorderRadius.circular(4.0),
                           ),
-                          child: Row(
+                          child: const Row(
                             children: [
                               Icon(Icons.star, color: Colors.black, size: 12.0),
                               SizedBox(width: 4.0),
@@ -216,8 +217,8 @@ class ClassicVictoria extends StatelessWidget {
                         ),
                       ],
                     ),
-                    SizedBox(height: 8.0),
-                    Text(
+                    const SizedBox(height: 8.0),
+                    const Text(
                       'In a large bowl, mix together flour, baking powder, sugar, and salt...',
                       style: TextStyle(fontSize: 16.0),
                     ),

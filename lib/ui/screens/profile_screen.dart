@@ -53,8 +53,8 @@ class ProfileScreen extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.7),
                           borderRadius: BorderRadius.circular(4.0),
                         ),
-                        child: Row(
-                          children: const [
+                        child: const Row(
+                          children: [
                             Icon(Icons.star, color: Colors.yellow, size: 16.0),
                             SizedBox(width: 4.0),
                             Text(
@@ -74,11 +74,11 @@ class ProfileScreen extends StatelessWidget {
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         color: Colors.blue,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Column(
-                              children: const [
+                              children: [
                                 Text(
                                   '15K',
                                   style: TextStyle(
@@ -95,9 +95,9 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const SizedBox(width: 120),
+                            SizedBox(width: 120),
                             Column(
-                              children: const [
+                              children: [
                                 Text(
                                   '246',
                                   style: TextStyle(
@@ -234,8 +234,8 @@ class ProfileScreen extends StatelessWidget {
                             color: Colors.black54,
                             borderRadius: BorderRadius.circular(4.0),
                           ),
-                          child: Row(
-                            children: const [
+                          child: const Row(
+                            children: [
                               Icon(Icons.star,
                                   color: Colors.yellow, size: 16.0),
                               SizedBox(width: 4.0),
@@ -249,10 +249,10 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Positioned(
+                      const Positioned(
                         bottom: 8.0,
                         left: 8.0,
-                        child: const Text(
+                        child: Text(
                           'Post Title',
                           style: TextStyle(
                             color: Colors.white,

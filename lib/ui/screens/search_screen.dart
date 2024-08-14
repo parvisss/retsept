@@ -26,6 +26,8 @@ class SearchScreen extends StatelessWidget {
     '#eggrolls',
   ];
 
+   SearchScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -153,8 +155,8 @@ class SearchScreen extends StatelessWidget {
               color: Colors.grey.withOpacity(0.7),
               borderRadius: BorderRadius.circular(4.0),
             ),
-            child: Row(
-              children: const [
+            child: const Row(
+              children: [
                 Icon(Icons.star, color: Colors.yellow, size: 12.0),
                 SizedBox(width: 4.0),
                 Text(
