@@ -1,3 +1,4 @@
+import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 
 class AddNewScreen extends StatefulWidget {
@@ -31,6 +32,9 @@ class _AddNewScreenState extends State<AddNewScreen> {
         backgroundColor: const Color(
           0xff4058A0,
         ),
+      ),
+      body: Column(
+        children: [],
       ),
     );
   }
