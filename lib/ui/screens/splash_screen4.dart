@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:retsept_cherno/ui/screens/home_Screen.dart';
 
 class Splash4Screen extends StatefulWidget {
+  const Splash4Screen({super.key});
+
   @override
   State<Splash4Screen> createState() => _Splash4ScreenState();
 }
 
 class _Splash4ScreenState extends State<Splash4Screen> {
+  @override
   void initState() {
     super.initState();
     _navigateToNextPage();
@@ -17,10 +19,11 @@ class _Splash4ScreenState extends State<Splash4Screen> {
     await Future.delayed(const Duration(seconds: 3), () {
       // ignore: use_build_context_synchronously
       Navigator.push(
+        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
           builder: (context) {
-            return HomeScreen();
+            return const HomeScreen();
           },
         ),
       );
@@ -31,7 +34,7 @@ class _Splash4ScreenState extends State<Splash4Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.orange,
         ),
         child: Center(
@@ -39,18 +42,18 @@ class _Splash4ScreenState extends State<Splash4Screen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: _buildFoodItem('assets/food5.png'),
               ),
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: _buildFoodItem('assets/food6.png'),
               ),
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: _buildFoodItem('assets/food7.png'),
               ),
-              SizedBox(height: 32.0),
+              const SizedBox(height: 32.0),
               const Text(
                 'Foodify Your Global  Kitchen',
                 style: TextStyle(

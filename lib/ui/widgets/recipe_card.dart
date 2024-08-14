@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class RecipeCard extends StatelessWidget {
+  const RecipeCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recipe Details'),
+        title: const Text('Recipe Details'),
       ),
       body: ListView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         children: [
           // Recipe Image
           Stack(
@@ -26,12 +28,12 @@ class RecipeCard extends StatelessWidget {
                 bottom: 8.0,
                 left: 8.0,
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
                   decoration: BoxDecoration(
                     color: Colors.grey.withOpacity(0.7),
                     borderRadius: BorderRadius.circular(4.0),
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(Icons.star, color: Colors.yellow, size: 12.0),
                       SizedBox(width: 4.0),
@@ -52,11 +54,11 @@ class RecipeCard extends StatelessWidget {
                 child: Row(
                   children: [
                     IconButton(
-                      icon: Icon(Icons.favorite_border, color: Colors.white),
+                      icon: const Icon(Icons.favorite_border, color: Colors.white),
                       onPressed: () {},
                     ),
                     IconButton(
-                      icon: Icon(Icons.share, color: Colors.white),
+                      icon: const Icon(Icons.share, color: Colors.white),
                       onPressed: () {},
                     ),
                   ],
@@ -64,28 +66,28 @@ class RecipeCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           // Chef Information
           Row(
             children: [
-              CircleAvatar(
+              const CircleAvatar(
                 backgroundImage: AssetImage(
                     'assets/chef2.png'), // Replace with your actual image asset
                 radius: 20.0,
               ),
-              SizedBox(width: 8.0),
-              Text(
+              const SizedBox(width: 8.0),
+              const Text(
                 'Kelly Mayer',
                 style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               ),
-              Spacer(),
+              const Spacer(),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
+                padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
                 decoration: BoxDecoration(
                   color: Colors.yellow,
                   borderRadius: BorderRadius.circular(4.0),
                 ),
-                child: Row(
+                child: const Row(
                   children: [
                     Icon(Icons.star, color: Colors.black, size: 12.0),
                     SizedBox(width: 4.0),
@@ -101,15 +103,15 @@ class RecipeCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           // Recipe Title
           Container(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
               color: Colors.blue,
               borderRadius: BorderRadius.circular(8.0),
             ),
-            child: Text(
+            child: const Text(
               'Perfect homemade pancake',
               style: TextStyle(
                 color: Colors.white,
@@ -118,7 +120,7 @@ class RecipeCard extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           // Recipe Info
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -128,7 +130,7 @@ class RecipeCard extends StatelessWidget {
               _buildInfoChip(Icons.timer, '48 Min'),
             ],
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -136,13 +138,13 @@ class RecipeCard extends StatelessWidget {
               _buildInfoChip(Icons.comment, '5'),
             ],
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           // Tabs
           DefaultTabController(
             length: 3,
             child: Column(
               children: [
-                TabBar(
+                const TabBar(
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey,
                   tabs: [
@@ -155,13 +157,13 @@ class RecipeCard extends StatelessWidget {
                   height: 200.0,
                   child: TabBarView(
                     children: [
-                      Center(child: Text('Introduction content here')),
-                      Center(child: Text('Ingredients content here')),
+                      const Center(child: Text('Introduction content here')),
+                      const Center(child: Text('Ingredients content here')),
                       // Comments Section
                       ListView(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         children: [
-                          Text('3 Comments',
+                          const Text('3 Comments',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           _buildComment(
                               'assets/chef3.png', // Replace with actual user image
@@ -195,7 +197,7 @@ class RecipeCard extends StatelessWidget {
 
   Widget _buildComment(String imagePath, String text) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -203,10 +205,10 @@ class RecipeCard extends StatelessWidget {
             backgroundImage: AssetImage(imagePath), // Use provided image path
             radius: 16.0,
           ),
-          SizedBox(width: 8.0),
+          const SizedBox(width: 8.0),
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(12.0),
+              padding: const EdgeInsets.all(12.0),
               decoration: BoxDecoration(
                 color: Colors.blue[50],
                 borderRadius: BorderRadius.circular(8.0),

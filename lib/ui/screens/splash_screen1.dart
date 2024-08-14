@@ -6,6 +6,7 @@ class Splash1Screen extends StatefulWidget {
   const Splash1Screen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _Splash1ScreenState createState() => _Splash1ScreenState();
 }
 
@@ -44,12 +45,21 @@ class _Splash1ScreenState extends State<Splash1Screen> {
           ),
         ),
         child: Center(
-          child: SvgPicture.asset(
-            "assets/svg/foodify.svg",
-            width: 300,
-            height: 300,
-          ),
-        ),
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              "assets/svg/foodify.svg",
+              width: 300,
+              height: 120,
+            ),
+            SvgPicture.asset(
+              "assets/svg/nuqtalar.svg",
+              width: 98,
+              height: 65,
+            ),
+          ],
+        )),
       ),
     );
   }

@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -38,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 1:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => AddNewScreen()),
+          MaterialPageRoute(builder: (context) => const AddNewScreen()),
         );
         break;
       case 2:
@@ -50,13 +51,13 @@ class _HomeScreenState extends State<HomeScreen> {
       case 3:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SaveScreen()),
+          MaterialPageRoute(builder: (context) => const SaveScreen()),
         );
         break;
       case 4:
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => ProfileScreen()),
+          MaterialPageRoute(builder: (context) => const ProfileScreen()),
         );
         break;
     }
@@ -187,7 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: SvgPicture.asset("assets/svg/home.svg"),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
+          const BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Search',
           ),

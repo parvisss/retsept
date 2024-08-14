@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:retsept_cherno/ui/screens/splash_screen3.dart';
 
 class Splash2Screen extends StatefulWidget {
+  const Splash2Screen({super.key});
+
   @override
   State<Splash2Screen> createState() => _Splash2ScreenState();
 }
 
 class _Splash2ScreenState extends State<Splash2Screen> {
+  @override
   void initState() {
     super.initState();
     _navigateToNextPage();
@@ -15,6 +18,7 @@ class _Splash2ScreenState extends State<Splash2Screen> {
   Future<void> _navigateToNextPage() async {
     await Future.delayed(const Duration(seconds: 3), () {
       Navigator.push(
+        // ignore: use_build_context_synchronously
         context,
         MaterialPageRoute(
           builder: (context) {
@@ -28,7 +32,7 @@ class _Splash2ScreenState extends State<Splash2Screen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.blue,
         ),
         child: Center(
@@ -36,19 +40,19 @@ class _Splash2ScreenState extends State<Splash2Screen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: _buildFoodItem('assets/food2.png'),
               ),
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: _buildFoodItem('assets/food3.png'),
               ),
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: _buildFoodItem('assets/food4.png'),
               ),
-              SizedBox(height: 32.0),
-              Text(
+              const SizedBox(height: 32.0),
+              const Text(
                 'Your personal guide to be a chef',
                 style: TextStyle(
                   color: Colors.white,
