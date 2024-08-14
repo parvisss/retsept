@@ -44,12 +44,21 @@ class _Splash1ScreenState extends State<Splash1Screen> {
           ),
         ),
         child: Center(
-          child: SvgPicture.asset(
-            "assets/svg/foodify.svg",
-            width: 300,
-            height: 300,
-          ),
-        ),
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              "assets/svg/foodify.svg",
+              width: 300,
+              height: 120,
+            ),
+            SvgPicture.asset(
+              "assets/svg/nuqtalar.svg",
+              width: 98,
+              height: 65,
+            ),
+          ],
+        )),
       ),
     );
   }
