@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/ui/widgets/route.dart';
 import 'package:go_router/go_router.dart';
+import 'package:retsept_cherno/ui/screens/home_Screen.dart';
 
 class Splash4Screen extends StatefulWidget {
   @override
@@ -16,7 +16,14 @@ class _Splash4ScreenState extends State<Splash4Screen> {
   Future<void> _navigateToNextPage() async {
     await Future.delayed(const Duration(seconds: 3), () {
       // ignore: use_build_context_synchronously
-      context.goNamed(AppRoutes.homescreen);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return HomeScreen();
+          },
+        ),
+      );
     });
   }
 
