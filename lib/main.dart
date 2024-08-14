@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/ui/screens/splash_screen1.dart';
 import 'package:flutter_application_2/ui/widgets/route.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,15 +15,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final GoRouter _router = AppRoutes.config;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routeInformationParser: _router.routeInformationParser,
-      routerDelegate: _router.routerDelegate,
-      routeInformationProvider: _router.routeInformationProvider,
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      home: Splash1Screen(),
     );
   }
 }

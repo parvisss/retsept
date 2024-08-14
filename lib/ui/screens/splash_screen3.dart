@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/ui/screens/splash_screen4.dart';
 import 'package:flutter_application_2/ui/widgets/route.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,8 +16,14 @@ class _SplashScreen3State extends State<SplashScreen3> {
 
   Future<void> _navigateToNextPage() async {
     await Future.delayed(const Duration(seconds: 3), () {
-      context.goNamed(AppRoutes.notificationsSettings);
-    });
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return Splash4Screen();
+          },
+        ),
+      );    });
   }
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/ui/widgets/recipe_card.dart';
 import 'package:flutter_application_2/ui/widgets/route.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,8 +31,15 @@ class ClassicVictoria extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () {
-                            context.goNamed(AppRoutes
-                                .recipe_card); // Bu yerda nom to'g'irlandi
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return RecipeCard();
+                                },
+                              ),
+                            );
+// Bu yerda nom to'g'irlandi
                           },
                           child: Text('View More'),
                         ),

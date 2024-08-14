@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/ui/screens/splash_screen2.dart';
 import 'package:flutter_application_2/ui/widgets/route.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,7 +19,14 @@ class _Splash1ScreenState extends State<Splash1Screen> {
 
   Future<void> _navigateToNextPage() async {
     await Future.delayed(const Duration(seconds: 3), () {
-      context.goNamed(AppRoutes.news); // Bu yerda nom to'g'irlandi
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) {
+            return Splash2Screen();
+          },
+        ),
+      );
     });
   }
 
