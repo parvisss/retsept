@@ -102,6 +102,9 @@ class _AddRetseptFormState extends State<AddRetseptForm> {
               onPressed: () {
                 if (_formKey.currentState?.validate() ?? false) {
                   final newRetsept = RetseptModel(
+                    dietaryTarget: "parhez",
+                    preparationTime: "30 min",
+                    difficulty: "easy",
                     id: DateTime.now().millisecondsSinceEpoch.toString(),
                     name: _nameController.text,
                     category: _categoryController.text,

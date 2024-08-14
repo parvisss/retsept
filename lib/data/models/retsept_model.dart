@@ -11,12 +11,17 @@ class RetseptModel {
   List<String> ingredients;
   List<String> preparation;
   List<ComentModel> coments;
+  String preparationTime;
+  String difficulty;
+  String dietaryTarget;
   int likes;
   String image; // Store file path as a string
   String video; // Store file path as a string
 
   RetseptModel({
-  
+    required this.dietaryTarget,
+    required this.difficulty,
+    required this.preparationTime,
     required this.id,
     required this.name,
     required this.category,

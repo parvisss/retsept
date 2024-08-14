@@ -7,6 +7,9 @@ part of 'retsept_model.dart';
 // **************************************************************************
 
 RetseptModel _$RetseptModelFromJson(Map<String, dynamic> json) => RetseptModel(
+      dietaryTarget: json['dietaryTarget'] as String,
+      difficulty: json['difficulty'] as String,
+      preparationTime: json['preparationTime'] as String,
       id: json['id'] as String,
       name: json['name'] as String,
       category: json['category'] as String,
@@ -32,6 +35,9 @@ Map<String, dynamic> _$RetseptModelToJson(RetseptModel instance) =>
       'ingredients': instance.ingredients,
       'preparation': instance.preparation,
       'coments': instance.coments.map((e) => e.toJson()).toList(),
+      'preparationTime': instance.preparationTime,
+      'difficulty': instance.difficulty,
+      'dietaryTarget': instance.dietaryTarget,
       'likes': instance.likes,
       'image': instance.image,
       'video': instance.video,
