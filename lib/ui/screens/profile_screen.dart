@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retsept_cherno/ui/screens/recept_post_grid_widget.dart';
-import 'package:retsept_cherno/ui/widgets/classic_victoria.dart';
 import 'package:retsept_cherno/ui/widgets/pea_and_ricotta.dart';
-import 'package:retsept_cherno/ui/widgets/recept_widget.dart';
-import 'package:retsept_cherno/ui/widgets/latest_recipe_card.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -222,8 +219,6 @@ class ProfileScreen extends StatelessWidget {
                       'assets/food6.png',
                     ],
                   ),
-                  const LatestRecipeCard(),
-                  const ClassicVictoria(),
                   PeaAndRicotta(),
                 ],
               ),

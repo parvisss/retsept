@@ -1,8 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'coment_model.g.dart'; // This directive is for the generated file
-
-@JsonSerializable() // This annotation indicates that this class is serializable
 class ComentModel {
   String title;
   String date;
@@ -15,9 +10,20 @@ class ComentModel {
   });
 
   // Factory method to create an instance from a JSON map
-  factory ComentModel.fromJson(Map<String, dynamic> json) =>
-      _$ComentModelFromJson(json);
+  factory ComentModel.fromJson(Map<String, dynamic> json) {
+    return ComentModel(
+      title: json['title'] as String,
+      date: json['date'] as String,
+      sender: json['sender'] as String,
+    );
+  }
 
   // Method to convert an instance to a JSON map
-  Map<String, dynamic> toJson() => _$ComentModelToJson(this);
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'date': date,
+      'sender': sender,
+    };
+  }
 }

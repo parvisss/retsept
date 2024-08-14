@@ -62,48 +62,31 @@ class RetseptFirebase {
 
   //? Stream of raw retsepts data from global collection
   Future<List<RetseptModel>> getRetsepts() async {
-    print("getRetsept");
     try {
       final response = await _dio.get("$_baseUrl/retsepts.json");
+
       if (response.statusCode == 200) {
         final Map<String, dynamic> data = response.data;
-        final retseps = data.values.map((map) {
-          return RetseptModel.fromJson(Map<String, dynamic>.from(map));
+
+        // Print the raw data to understand its structure
+        print("Response data: $data");
+
+        // Convert the map to a list of RetseptModel
+        final retsepts = data.entries.map((entry) {
+          final retseptData = entry.value as Map<String, dynamic>;
+          return RetseptModel.fromJson(retseptData);
         }).toList();
-        return retseps;
+
+        return retsepts;
       } else {
-        return [
-          RetseptModel(
-              dietaryTarget: "",
-              difficulty: "",
-              preparationTime: "",
-              id: "1",
-              name: "name",
-              category: "category",
-              ingredients: [],
-              preparation: [],
-              coments: [],
-              likes: 10,
-              image: "",
-              video: "")
-        ];
+        // Handle non-200 status codes
+        print("Error: ${response.statusCode}");
+        return [];
       }
     } catch (e) {
-      return [
-        RetseptModel(
-            dietaryTarget: "",
-            difficulty: "",
-            preparationTime: "",
-            id: "1",
-            name: "name",
-            category: "category",
-            ingredients: [],
-            preparation: [],
-            coments: [],
-            likes: 10,
-            image: "",
-            video: "")
-      ];
+      // Handle errors (network issues, JSON parsing issues, etc.)
+      print("Error fetching retsepts: $e");
+      return [];
     }
   }
 }

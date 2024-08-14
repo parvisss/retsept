@@ -38,7 +38,7 @@ class ClassicVictoria extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return RecipeCard();
+                                    return const RecipeCard();
                                   },
                                 ),
                               );
@@ -49,17 +49,14 @@ class ClassicVictoria extends StatelessWidget {
                       ),
                       const SizedBox(height: 16.0),
                       Container(
-                        width: 200,
-                        height: 50,
+                        width: double.infinity,
                         decoration: BoxDecoration(
-                          color: Colors.blue,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            'Perfect homemade pancake',
-                            style: TextStyle(
-                              color: Colors.white,
+                            retsept.description,
+                            style: const TextStyle(
                               fontSize: 18.0,
                               fontWeight: FontWeight.bold,
                             ),
@@ -67,20 +64,23 @@ class ClassicVictoria extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 16.0),
-                      Column(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          _buildInfoChip(Icons.local_fire_department, 'Low Calory'),
-                          _buildInfoChip(Icons.fastfood, 'Simple'),
-                          _buildInfoChip(Icons.timer, '48 Min'),
+                          _buildInfoChip(Icons.local_fire_department,
+                              retsept.dietaryTarget),
+                          _buildInfoChip(Icons.fastfood, retsept.difficulty),
                         ],
                       ),
+                      _buildInfoChip(Icons.timer, retsept.preparationTime),
                       const SizedBox(height: 16.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          _buildInfoChip(Icons.favorite, '435'),
-                          _buildInfoChip(Icons.comment, '5'),
+                          _buildInfoChip(
+                              Icons.favorite, retsept.likes.toString()),
+                          _buildInfoChip(
+                              Icons.comment, retsept.coments.length.toString()),
                         ],
                       ),
                     ],
@@ -114,7 +114,7 @@ class ClassicVictoria extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image.asset(
-                        'assets/classic.png', // Replace with your actual image asset
+                        'assets/classic.png', //! change image
                         fit: BoxFit.cover,
                         width: 150.0,
                         height: 230.0,
@@ -130,13 +130,14 @@ class ClassicVictoria extends StatelessWidget {
                           color: Colors.grey.withOpacity(0.7),
                           borderRadius: BorderRadius.circular(4.0),
                         ),
-                        child: const Row(
+                        child: Row(
                           children: [
-                            Icon(Icons.star, color: Colors.yellow, size: 12.0),
-                            SizedBox(width: 4.0),
+                            const Icon(Icons.star,
+                                color: Colors.yellow, size: 12.0),
+                            const SizedBox(width: 4.0),
                             Text(
-                              '4.8',
-                              style: TextStyle(
+                              retsept.rate.toString(),
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 12.0,
                               ),
@@ -150,7 +151,8 @@ class ClassicVictoria extends StatelessWidget {
                       left: 8.0,
                       child: Row(
                         children: [
-                          const Icon(Icons.timer, color: Colors.white, size: 12.0),
+                          const Icon(Icons.timer,
+                              color: Colors.white, size: 12.0),
                           const SizedBox(width: 4.0),
                           Text(
                             retsept.preparationTime,
@@ -160,7 +162,8 @@ class ClassicVictoria extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 8.0),
-                          const Icon(Icons.restaurant, color: Colors.white, size: 12.0),
+                          const Icon(Icons.restaurant,
+                              color: Colors.white, size: 12.0),
                           const SizedBox(width: 4.0),
                           Text(
                             retsept.difficulty,
@@ -192,7 +195,8 @@ class ClassicVictoria extends StatelessWidget {
                     Row(
                       children: [
                         const CircleAvatar(
-                          backgroundImage: AssetImage('assets/chef2.png'), // Replace with your actual image asset
+                          backgroundImage: AssetImage(
+                              'assets/chef2.png'), //! change to users image
                           radius: 20.0,
                         ),
                         const SizedBox(width: 8.0),
@@ -220,9 +224,9 @@ class ClassicVictoria extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 8.0),
-                    const Text(
-                      'In a large bowl, mix together flour, baking powder, sugar, and salt...',
-                      style: TextStyle(fontSize: 16.0),
+                    Text(
+                      retsept.description,
+                      style: const TextStyle(fontSize: 16.0),
                     ),
                   ],
                 ),
