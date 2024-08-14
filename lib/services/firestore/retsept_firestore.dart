@@ -61,26 +61,49 @@ class RetseptFirestore {
   }
 
   //? Stream of raw retsepts data from global collection
-  Stream<List<Map<String, dynamic>>> getRawRetseptsStream() async* {
-    while (true) {
-      try {
-        final response = await _dio.get("$_baseUrl/retsepts.json");
-        if (response.statusCode == 200) {
-          final retseptsMap = response.data as Map<String, dynamic>;
-          final retseptsList = retseptsMap.entries.map((entry) {
-            return entry.value as Map<String, dynamic>;
-          }).toList();
-          yield retseptsList;
-        } else {
-          print('Failed to fetch retsepts: ${response.statusCode}');
-        }
-      } catch (e) {
-        print('Error fetching retsepts: $e');
+  Future<List<RetseptModel>> getRetsepts() async {
+    print("getRetsept");
+    try {
+      final response = await _dio.get("$_baseUrl/retsepts.json");
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = response.data;
+        final retseps = data.values.map((map) {
+          return RetseptModel.fromJson(Map<String, dynamic>.from(map));
+        }).toList();
+        return retseps;
+      } else {
+        return [
+          RetseptModel(
+              dietaryTarget: "",
+              difficulty: "",
+              preparationTime: "",
+              id: "1",
+              name: "name",
+              category: "category",
+              ingredients: [],
+              preparation: [],
+              coments: [],
+              likes: 10,
+              image: "",
+              video: "")
+        ];
       }
-
-      await Future.delayed(
-        const Duration(seconds: 5),
-      ); // Poll every 5 seconds to avoid error causing by number of requests
+    } catch (e) {
+      return [
+        RetseptModel(
+            dietaryTarget: "",
+            difficulty: "",
+            preparationTime: "",
+            id: "1",
+            name: "name",
+            category: "category",
+            ingredients: [],
+            preparation: [],
+            coments: [],
+            likes: 10,
+            image: "",
+            video: "")
+      ];
     }
   }
 }
