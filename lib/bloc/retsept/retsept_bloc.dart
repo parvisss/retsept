@@ -1,16 +1,16 @@
 import 'package:bloc/bloc.dart';
-import 'package:retsept_cherno/services/firestore/retsept_firestore.dart';
+import 'package:retsept_cherno/services/firestore/retsept_firebase.dart';
 import 'retsept_event.dart';
 import 'retsept_state.dart';
 
 class RetseptBloc extends Bloc<RetseptEvent, RetseptState> {
-  final RetseptFirestore retseptService;
+  final RetseptFirebase retseptService;
 
   RetseptBloc(this.retseptService) : super(RetseptInitial()) {
     on<AddRetseptEvent>(_onAddRetsept);
     on<EditRetseptEvent>(_onEditRetsept);
     on<DeleteRetseptEvent>(_onDeleteRetsept);
-    on<StreamRetseptsEvent>(_onStreamRetsepts);
+    on<LoadRetsepts>(_onLoadRetsepts);
   }
 
   void _onAddRetsept(AddRetseptEvent event, Emitter<RetseptState> emit) async {
@@ -39,14 +39,13 @@ class RetseptBloc extends Bloc<RetseptEvent, RetseptState> {
     }
   }
 
-  Stream _onStreamRetsepts(
-      StreamRetseptsEvent event, Emitter<RetseptState> emit) async* {
+  _onLoadRetsepts(LoadRetsepts event, Emitter<RetseptState> emit) async {
     try {
-      await for (final retsepts in retseptService.getRawRetseptsStream()) {
-        yield RetseptLoaded(retsepts);
-      }
+      final retsept = await retseptService.getRetsepts();
+      print(retsept.first);
+      emit(RetseptLoaded(retsept));
     } catch (e) {
-      yield RetseptError('Failed to stream retsepts: $e');
+      print("error : $e");
     }
   }
 }

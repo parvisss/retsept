@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:retsept_cherno/data/models/retsept_model.dart';
 import 'package:retsept_cherno/ui/widgets/recipe_card.dart';
 
 class ClassicVictoria extends StatelessWidget {
-  const ClassicVictoria({super.key});
+  const ClassicVictoria({super.key, required this.retsept});
+  final RetseptModel retsept;
 
   @override
   Widget build(BuildContext context) {
@@ -15,72 +17,74 @@ class ClassicVictoria extends StatelessWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16.0),
               ),
-              content: SizedBox(
-                width: double.maxFinite,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return RecipeCard();
-                                },
-                              ),
-                            );
-// Bu yerda nom to'g'irlandi
-                          },
-                          child: const Text('View More'),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16.0),
-                    Container(
-                      width: 200,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(8.0),
+              content: SingleChildScrollView(
+                child: SizedBox(
+                  width: double.maxFinite,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) {
+                                    return RecipeCard();
+                                  },
+                                ),
+                              );
+                            },
+                            child: const Text('View More'),
+                          ),
+                        ],
                       ),
-                      child: const Text(
-                        'Perfect homemade pancake',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
+                      const SizedBox(height: 16.0),
+                      Container(
+                        width: 200,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: const Center(
+                          child: Text(
+                            'Perfect homemade pancake',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 16.0),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _buildInfoChip(
-                            Icons.local_fire_department, 'Low Calory'),
-                        _buildInfoChip(Icons.fastfood, 'Simple'),
-                        _buildInfoChip(Icons.timer, '48 Min'),
-                      ],
-                    ),
-                    const SizedBox(height: 16.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _buildInfoChip(Icons.favorite, '435'),
-                        _buildInfoChip(Icons.comment, '5'),
-                      ],
-                    ),
-                  ],
+                      const SizedBox(height: 16.0),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildInfoChip(Icons.local_fire_department, 'Low Calory'),
+                          _buildInfoChip(Icons.fastfood, 'Simple'),
+                          _buildInfoChip(Icons.timer, '48 Min'),
+                        ],
+                      ),
+                      const SizedBox(height: 16.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _buildInfoChip(Icons.favorite, '435'),
+                          _buildInfoChip(Icons.comment, '5'),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
@@ -141,27 +145,26 @@ class ClassicVictoria extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Positioned(
+                    Positioned(
                       bottom: 8.0,
                       left: 8.0,
                       child: Row(
                         children: [
-                          Icon(Icons.timer, color: Colors.white, size: 12.0),
-                          SizedBox(width: 4.0),
+                          const Icon(Icons.timer, color: Colors.white, size: 12.0),
+                          const SizedBox(width: 4.0),
                           Text(
-                            '30 Min',
-                            style: TextStyle(
+                            retsept.preparationTime,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 12.0,
                             ),
                           ),
-                          SizedBox(width: 8.0),
-                          Icon(Icons.restaurant,
-                              color: Colors.white, size: 12.0),
-                          SizedBox(width: 4.0),
+                          const SizedBox(width: 8.0),
+                          const Icon(Icons.restaurant, color: Colors.white, size: 12.0),
+                          const SizedBox(width: 4.0),
                           Text(
-                            'Medium',
-                            style: TextStyle(
+                            retsept.difficulty,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 12.0,
                             ),
@@ -177,9 +180,10 @@ class ClassicVictoria extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Classic Victoria sandwich recip...',
-                      style: TextStyle(
+                    Text(
+                      retsept.name,
+                      overflow: TextOverflow.clip,
+                      style: const TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -188,11 +192,9 @@ class ClassicVictoria extends StatelessWidget {
                     Row(
                       children: [
                         const CircleAvatar(
-                          backgroundImage: AssetImage(
-                              'assets/chef2.png'), // Replace with your actual image asset
+                          backgroundImage: AssetImage('assets/chef2.png'), // Replace with your actual image asset
                           radius: 20.0,
                         ),
-                        const Text('Rick Dolynsky'),
                         const SizedBox(width: 8.0),
                         Container(
                           padding: const EdgeInsets.symmetric(

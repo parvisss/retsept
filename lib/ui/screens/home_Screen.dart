@@ -1,15 +1,16 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
+import 'package:retsept_cherno/bloc/retsept/retsept_event.dart';
+import 'package:retsept_cherno/bloc/retsept/retsept_state.dart';
+import 'package:retsept_cherno/services/firestore/retsept_firebase.dart';
 import 'package:retsept_cherno/ui/screens/add_new_screen.dart';
 import 'package:retsept_cherno/ui/screens/profile_screen.dart';
 import 'package:retsept_cherno/ui/screens/save_screen.dart';
 import 'package:retsept_cherno/ui/screens/search_screen.dart';
-import 'package:retsept_cherno/ui/widgets/carusel_item.dart';
 import 'package:retsept_cherno/ui/widgets/classic_victoria.dart';
-import 'package:retsept_cherno/ui/widgets/latest_recipe_card.dart';
-import 'package:retsept_cherno/ui/widgets/pea_and_ricotta.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -67,122 +68,51 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.blue,
-              Colors.white,
-            ],
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  "assets/svg/foodify.svg",
-                  width: 150,
-                  height: 150,
-                ),
-                const SizedBox(height: 32.0),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 8.0,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                        ),
-                        child: const TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Search',
-                            prefixIcon: Icon(Icons.search),
-                            border: InputBorder.none,
-                            contentPadding: EdgeInsets.symmetric(
-                              vertical: 16.0,
-                              horizontal: 16.0,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8.0),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.yellow,
-                        foregroundColor: Colors.black,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 16.0,
-                          horizontal: 24.0,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                      ),
-                      child: SvgPicture.asset(
-                        "assets/svg/filter.svg",
-                        height: 20,
-                        width: 20,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 32.0),
-                const Row(
-                  children: [
-                    Text(
-                      'Popular Recipes',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16.0),
-                CarouselSlider.builder(
-                  itemCount: imageList.length,
-                  itemBuilder: (context, index, realIndex) {
-                    return CaruselItem(
-                      imagePath: imageList[index], // Pass the image path
-                      title:
-                          'Recipe ${index + 1}', // Pass a title or use a dynamic title
-                    );
-                  },
-                  options: CarouselOptions(
-                    height: 200.0,
-                    enlargeCenterPage: true,
-                    autoPlay: true,
-                    aspectRatio: 16 / 9,
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enableInfiniteScroll: true,
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 800),
-                    viewportFraction: 0.8,
-                  ),
-                ),
-                const SizedBox(height: 20.0),
-                const LatestRecipeCard(),
-                const SizedBox(height: 20.0),
-                const ClassicVictoria(),
-                const SizedBox(height: 20.0),
-                PeaAndRicotta()
+      body: BlocProvider(
+        create: (context) =>
+            RetseptBloc(RetseptFirebase())..add(LoadRetsepts()),
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.blue,
+                Colors.white,
               ],
             ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: BlocBuilder<RetseptBloc, RetseptState>(
+                builder: (context, state) {
+              if (state is RetseptLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else if (state is RetseptError) {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(state.message),
+                  ),
+                );
+              }
+              if (state is RetseptLoaded) {
+                return ListView.builder(
+                  itemCount: state.props.length,
+                  itemBuilder: (ctx, index) {
+                    final retsetsept = state.props[index];
+                    return ClassicVictoria(retsept: retsetsept);
+                  },
+                );
+              }
+              return const Center(
+                child: Text("Empty Data"),
+              );
+            }),
           ),
         ),
       ),

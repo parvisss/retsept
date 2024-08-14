@@ -1,4 +1,3 @@
-import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
 import 'package:retsept_cherno/ui/widgets/ingredients.dart';
 
@@ -191,6 +190,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
           ),
         ),
       ),
+
     );
   }
 
@@ -207,6 +207,10 @@ class _AddNewScreenState extends State<AddNewScreen> {
             color: Colors.white,
           ),
         ),
+
+      body: const Column(
+        children: [],
+
       ),
     );
   }
