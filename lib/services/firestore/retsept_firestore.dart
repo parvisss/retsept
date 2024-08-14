@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:retsept_cherno/models/retsept_model.dart';
+import 'package:retsept_cherno/data/models/retsept_model.dart';
 import 'package:retsept_cherno/services/firestore/user_firestore.dart';
 
 class RetseptFirestore {
@@ -26,6 +26,23 @@ class RetseptFirestore {
       }
     } catch (e) {
       print('Error adding retsept: $e');
+    }
+  }
+
+  //? Edit retsept in global collection
+  Future<void> editRetsept(String id, RetseptModel updatedRetsept) async {
+    try {
+      final Map<String, dynamic> retseptJson = updatedRetsept.toJson();
+      final response =
+          await _dio.put("$_baseUrl/retsepts/$id.json", data: retseptJson);
+
+      if (response.statusCode == 200) {
+        print('Retsept updated successfully');
+      } else {
+        print('Failed to update retsept: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error updating retsept: $e');
     }
   }
 

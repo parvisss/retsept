@@ -9,18 +9,21 @@ class UserModel {
   String name;
   String email;
   String password;
-  List<dynamic> saved; // Use a more specific type if possible
-  List<dynamic> favorites; // Use a more specific type if possible
-  String image; // Store the file path as a string
+  List<dynamic> saved;
+  List<dynamic> favorites;
+  String image;
+  String favoriteMeal;
 
   UserModel({
+
     required this.id,
     required this.name,
     required this.email,
     required this.password,
     required this.saved,
     required this.favorites,
-    required this.image, // Store the file path as a string
+    required this.image,
+    required this.favoriteMeal
   });
 
   // Factory method for creating an instance from a JSON map

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:retsept_cherno/models/user_model.dart';
+import 'package:retsept_cherno/data/models/user_model.dart';
 
 class UserFirestore {
   final String _baseUrl =
