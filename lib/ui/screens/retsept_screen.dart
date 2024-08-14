@@ -6,23 +6,40 @@ import 'package:retsept_cherno/bloc/retsept/retsept_state.dart';
 import 'package:retsept_cherno/data/models/retsept_model.dart';
 import 'package:retsept_cherno/services/firestore/retsept_firestore.dart';
 
-class RetseptScreen extends StatelessWidget {
+class RetseptScreen extends StatefulWidget {
   const RetseptScreen({super.key});
+
+  @override
+  State<RetseptScreen> createState() => _RetseptScreenState();
+}
+
+class _RetseptScreenState extends State<RetseptScreen> {
+  @override
+  void initState() {
+    context.read<RetseptBloc>().add(LoadRetsepts());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Retsepts '),
+        title: const Text('Retsepts'),
       ),
       body: BlocProvider(
         create: (context) =>
-            RetseptBloc(RetseptFirestore())..add(StreamRetseptsEvent()),
+            RetseptBloc(RetseptFirestore())..add(LoadRetsepts()),
         child: Column(
           children: [
             Expanded(
               child: BlocBuilder<RetseptBloc, RetseptState>(
                 builder: (context, state) {
+                  if (state is RetseptError) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(state.message),
+                    );
+                  }
                   if (state is RetseptLoading) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (state is RetseptLoaded) {
@@ -32,15 +49,14 @@ class RetseptScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final retsept = retsepts[index];
                         return ListTile(
-                          title: Text(retsept['name']),
-                          subtitle: Text(retsept['category']),
+                          title: Text(retsept.name),
+                          subtitle: Text(retsept.category),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete),
                             onPressed: () {
-                              // Dispatch a delete event
                               context
                                   .read<RetseptBloc>()
-                                  .add(DeleteRetseptEvent(retsept['id']));
+                                  .add(DeleteRetseptEvent(retsept.id));
                             },
                           ),
                         );
@@ -65,7 +81,6 @@ class AddRetseptForm extends StatefulWidget {
   const AddRetseptForm({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _AddRetseptFormState createState() => _AddRetseptFormState();
 }
 
