@@ -19,6 +19,7 @@ RetseptModel _$RetseptModelFromJson(Map<String, dynamic> json) => RetseptModel(
       coments: (json['coments'] as List<dynamic>)
           .map((e) => ComentModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      likes: (json['likes'] as num).toInt(),
       image: json['image'] as String,
       video: json['video'] as String,
     );
@@ -31,6 +32,7 @@ Map<String, dynamic> _$RetseptModelToJson(RetseptModel instance) =>
       'ingredients': instance.ingredients,
       'preparation': instance.preparation,
       'coments': instance.coments.map((e) => e.toJson()).toList(),
+      'likes': instance.likes,
       'image': instance.image,
       'video': instance.video,
     };

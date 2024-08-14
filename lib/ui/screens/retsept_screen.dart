@@ -53,7 +53,7 @@ class RetseptScreen extends StatelessWidget {
                 },
               ),
             ),
-            AddRetseptForm(), // Added form here
+            const AddRetseptForm(), // Added form here
           ],
         ),
       ),
@@ -62,7 +62,10 @@ class RetseptScreen extends StatelessWidget {
 }
 
 class AddRetseptForm extends StatefulWidget {
+  const AddRetseptForm({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _AddRetseptFormState createState() => _AddRetseptFormState();
 }
 
@@ -82,7 +85,7 @@ class _AddRetseptFormState extends State<AddRetseptForm> {
           children: [
             TextFormField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: 'Name'),
+              decoration: const InputDecoration(labelText: 'Name'),
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return 'Please enter a name';
@@ -92,7 +95,7 @@ class _AddRetseptFormState extends State<AddRetseptForm> {
             ),
             TextFormField(
               controller: _categoryController,
-              decoration: InputDecoration(labelText: 'Category'),
+              decoration: const InputDecoration(labelText: 'Category'),
             ),
             // Add other fields similarly
             ElevatedButton(
@@ -105,13 +108,14 @@ class _AddRetseptFormState extends State<AddRetseptForm> {
                     ingredients: [], // Populate based on your form
                     preparation: [], // Populate based on your form
                     coments: [],
+                    likes: 10,
                     image: '',
                     video: '',
                   );
                   context.read<RetseptBloc>().add(AddRetseptEvent(newRetsept));
                 }
               },
-              child: Text('Add Retsept'),
+              child: const Text('Add Retsept'),
             ),
           ],
         ),
