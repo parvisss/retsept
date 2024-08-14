@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:retsept_cherno/services/firestore/retsept_firestore.dart';
+import 'package:retsept_cherno/services/firestore/retsept_firebase.dart';
 import 'retsept_event.dart';
 import 'retsept_state.dart';
 
 class RetseptBloc extends Bloc<RetseptEvent, RetseptState> {
-  final RetseptFirestore retseptService;
+  final RetseptFirebase retseptService;
 
   RetseptBloc(this.retseptService) : super(RetseptInitial()) {
     on<AddRetseptEvent>(_onAddRetsept);
