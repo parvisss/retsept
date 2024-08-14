@@ -13,7 +13,7 @@ class RetseptScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Retsepts'),
+        title: const Text('Retsepts '),
       ),
       body: BlocProvider(
         create: (context) =>
