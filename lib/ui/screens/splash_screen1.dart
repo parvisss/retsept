@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/ui/screens/splash_screen2.dart';
-import 'package:flutter_application_2/ui/widgets/route.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:retsept_cherno/ui/screens/splash_screen2.dart';
 
 class Splash1Screen extends StatefulWidget {
   const Splash1Screen({super.key});
@@ -45,11 +44,10 @@ class _Splash1ScreenState extends State<Splash1Screen> {
           ),
         ),
         child: Center(
-          child: Image.asset(
-            "assets/foodify.png",
-            width: 300.0,
-            height: 300.0,
-            fit: BoxFit.contain,
+          child: SvgPicture.asset(
+            "assets/svg/foodify.svg",
+            width: 300,
+            height: 300,
           ),
         ),
       ),

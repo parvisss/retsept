@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/ui/screens/home_Screen.dart';
-import 'package:flutter_application_2/ui/widgets/route.dart';
 import 'package:go_router/go_router.dart';
+import 'package:retsept_cherno/ui/screens/home_Screen.dart';
 
 class Splash4Screen extends StatefulWidget {
   @override

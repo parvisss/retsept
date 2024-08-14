@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/ui/screens/splash_screen4.dart';
-import 'package:flutter_application_2/ui/widgets/route.dart';
 import 'package:go_router/go_router.dart';
+import 'package:retsept_cherno/ui/screens/splash_screen4.dart';
 
 class SplashScreen3 extends StatefulWidget {
   @override

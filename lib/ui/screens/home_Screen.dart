@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_2/ui/screens/add_new_screen.dart';
-import 'package:flutter_application_2/ui/screens/profile_screen.dart';
-import 'package:flutter_application_2/ui/screens/save_screen.dart';
-import 'package:flutter_application_2/ui/screens/search_screen.dart';
-import 'package:flutter_application_2/ui/widgets/classic_victoria.dart';
-import 'package:flutter_application_2/ui/widgets/latest_recipe_card.dart';
-import 'package:flutter_application_2/ui/widgets/pea_and_ricotta.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:retsept_cherno/ui/screens/add_new_screen.dart';
+import 'package:retsept_cherno/ui/screens/profile_screen.dart';
+import 'package:retsept_cherno/ui/screens/save_screen.dart';
+import 'package:retsept_cherno/ui/screens/search_screen.dart';
+import 'package:retsept_cherno/ui/widgets/classic_victoria.dart';
+import 'package:retsept_cherno/ui/widgets/latest_recipe_card.dart';
+import 'package:retsept_cherno/ui/widgets/pea_and_ricotta.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -82,10 +82,10 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  'assets/foodify.png',
-                  width: 150.0,
-                  height: 150.0,
+                SvgPicture.asset(
+                  "assets/svg/foodify.svg",
+                  width: 150,
+                  height: 150,
                 ),
                 const SizedBox(height: 32.0),
                 Row(
