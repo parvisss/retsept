@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
 import 'package:retsept_cherno/bloc/user/user_bloc.dart';
-import 'package:retsept_cherno/services/firestore/retsept_firestore.dart';
+import 'package:retsept_cherno/services/firestore/retsept_firebase.dart';
 import 'package:retsept_cherno/services/firestore/user_firestore.dart';
 import 'package:retsept_cherno/ui/screens/home_Screen.dart';
 
@@ -25,7 +25,7 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => RetseptBloc(RetseptFirestore()),
+          create: (context) => RetseptBloc(RetseptFirebase()),
         ),
         BlocProvider(
           create: (context) => UserBloc(UserFirestore()),

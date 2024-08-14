@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:retsept_cherno/data/models/retsept_model.dart';
 import 'package:retsept_cherno/services/firestore/user_firestore.dart';
 
-class RetseptFirestore {
+class RetseptFirebase {
   final String _baseUrl =
       "https://retsept-acd0d-default-rtdb.firebaseio.com"; // Base URL
   final Dio _dio = Dio();

@@ -5,8 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_event.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_state.dart';
-import 'package:retsept_cherno/data/models/retsept_model.dart';
-import 'package:retsept_cherno/services/firestore/retsept_firestore.dart';
+import 'package:retsept_cherno/services/firestore/retsept_firebase.dart';
 import 'package:retsept_cherno/ui/screens/add_new_screen.dart';
 import 'package:retsept_cherno/ui/screens/profile_screen.dart';
 import 'package:retsept_cherno/ui/screens/save_screen.dart';
@@ -71,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: BlocProvider(
         create: (context) =>
-            RetseptBloc(RetseptFirestore())..add(LoadRetsepts()),
+            RetseptBloc(RetseptFirebase())..add(LoadRetsepts()),
         child: Container(
           width: double.infinity,
           height: double.infinity,
@@ -110,7 +109,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 );
               }
-              return const Center(child: Text("Empty Data"));
+              return const Center(
+                child: Text("Empty Data"),
+              );
             }),
           ),
         ),
