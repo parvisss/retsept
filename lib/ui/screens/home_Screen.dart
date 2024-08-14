@@ -202,7 +202,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset("assets/svg/person.svg"),
-            label: 'Profile',
+            label: 'Profile ',
           ),
         ],
         currentIndex: _selectedIndex,
