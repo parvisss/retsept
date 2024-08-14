@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
+import 'package:retsept_cherno/bloc/user/user_bloc.dart';
+import 'package:retsept_cherno/services/firestore/retsept_firestore.dart';
+import 'package:retsept_cherno/services/firestore/user_firestore.dart';
 import 'package:retsept_cherno/ui/screens/splash_screen1.dart';
 
 void main() {
@@ -15,9 +20,19 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Splash1Screen(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => RetseptBloc(RetseptFirestore()),
+        ),
+        BlocProvider(
+          create: (context) => UserBloc(UserFirestore()),
+        ),
+      ],
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Splash1Screen(),
+      ),
     );
   }
 }
