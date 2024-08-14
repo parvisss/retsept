@@ -6,6 +6,7 @@ import 'package:retsept_cherno/ui/screens/add_new_screen.dart';
 import 'package:retsept_cherno/ui/screens/profile_screen.dart';
 import 'package:retsept_cherno/ui/screens/save_screen.dart';
 import 'package:retsept_cherno/ui/screens/search_screen.dart';
+import 'package:retsept_cherno/ui/widgets/carusel_item.dart';
 import 'package:retsept_cherno/ui/widgets/classic_victoria.dart';
 import 'package:retsept_cherno/ui/widgets/latest_recipe_card.dart';
 import 'package:retsept_cherno/ui/widgets/pea_and_ricotta.dart';
@@ -156,8 +157,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 CarouselSlider.builder(
                   itemCount: imageList.length,
                   itemBuilder: (context, index, realIndex) {
-                    return _buildCarouselItem(
-                        imageList[index], 'Recipe ${index + 1}');
+                    return CaruselItem(
+                      imagePath: imageList[index], // Pass the image path
+                      title:
+                          'Recipe ${index + 1}', // Pass a title or use a dynamic title
+                    );
                   },
                   options: CarouselOptions(
                     height: 200.0,
@@ -172,9 +176,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 const SizedBox(height: 20.0),
-                LatestRecipeCard(),
+                const LatestRecipeCard(),
                 const SizedBox(height: 20.0),
-                ClassicVictoria(),
+                const ClassicVictoria(),
                 const SizedBox(height: 20.0),
                 PeaAndRicotta()
               ],
@@ -208,39 +212,6 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.yellow,
         onTap: _onItemTapped,
-      ),
-    );
-  }
-
-  Widget _buildCarouselItem(String imagePath, String title) {
-    return Container(
-      margin: const EdgeInsets.all(5.0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.0),
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
-        ),
-      ),
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.6),
-            borderRadius: const BorderRadius.only(
-              bottomLeft: Radius.circular(8.0),
-              bottomRight: Radius.circular(8.0),
-            ),
-          ),
-          child: Text(
-            title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
       ),
     );
   }
