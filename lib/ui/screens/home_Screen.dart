@@ -1,11 +1,7 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart'; // Removed the duplicate import
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:retsept_cherno/ui/screens/add_new_screen.dart';
-import 'package:retsept_cherno/ui/screens/profile_screen.dart';
-import 'package:retsept_cherno/ui/screens/save_screen.dart';
-import 'package:retsept_cherno/ui/screens/search_screen.dart';
+import 'package:retsept_cherno/ui/widgets/bottom_navigation_bar.dart';
 import 'package:retsept_cherno/ui/widgets/carusel_item.dart';
 import 'package:retsept_cherno/ui/widgets/classic_victoria.dart';
 import 'package:retsept_cherno/ui/widgets/latest_recipe_card.dart';
@@ -25,44 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
     'assets/food4.png',
     'assets/food5.png',
   ];
-
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-
-    switch (index) {
-      case 0:
-        // Navigate to Home Screen
-        break;
-      case 1:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const AddNewScreen()),
-        );
-        break;
-      case 2:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SearchScreen()),
-        );
-        break;
-      case 3:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const SaveScreen()),
-        );
-        break;
-      case 4:
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const ProfileScreen()),
-        );
-        break;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -180,39 +138,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 20.0),
                 const ClassicVictoria(),
                 const SizedBox(height: 20.0),
-                PeaAndRicotta()
+                PeaAndRicotta(),
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/svg/home.svg"),
-            label: 'Home',
-          ),
-          const BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/svg/add_new.svg"),
-            label: 'Add new',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/svg/save.svg"),
-            label: 'Save',
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset("assets/svg/person.svg"),
-            label: 'Profile ',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.yellow,
-        onTap: _onItemTapped,
-      ),
+      bottomNavigationBar:
+          CustomBottomNavigationBar(), // Updated with custom bottom navigation
     );
   }
 }

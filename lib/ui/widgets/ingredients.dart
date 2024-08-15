@@ -1,5 +1,6 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
+import 'package:retsept_cherno/ui/widgets/bottom_navigation_bar.dart';
 import 'package:retsept_cherno/ui/widgets/instruction.dart';
 import 'package:retsept_cherno/ui/widgets/recipe_screen.dart';
 
@@ -79,6 +80,8 @@ class _IngredientsState extends State<Ingredients> {
           ],
         ),
       ),
+      bottomNavigationBar:
+          CustomBottomNavigationBar(), // Updated with custom bottom navigation
     );
   }
 }

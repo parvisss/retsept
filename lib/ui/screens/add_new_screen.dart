@@ -1,6 +1,13 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
+import 'package:retsept_cherno/ui/widgets/bottom_navigation_bar.dart';
+import 'package:retsept_cherno/ui/widgets/build_chip_selector_widget.dart';
+import 'package:retsept_cherno/ui/widgets/difficulty_selector.dart';
 import 'package:retsept_cherno/ui/widgets/ingredients.dart';
+import 'package:retsept_cherno/ui/widgets/number_selector.dart';
+import 'package:retsept_cherno/ui/widgets/section_title.dart';
+import 'package:retsept_cherno/ui/widgets/text_field.dart';
+import 'package:retsept_cherno/ui/widgets/time_field.dart';
 
 class AddNewScreen extends StatefulWidget {
   const AddNewScreen({super.key});
@@ -18,13 +25,10 @@ class _AddNewScreenState extends State<AddNewScreen> {
 
   void _nextStep() {
     if (_currentStep < 3) {
-      setState(
-        () {
-          _currentStep++;
-        },
-      );
+      setState(() {
+        _currentStep++;
+      });
 
-      // Navigate to the Ingredients page when moving to step 2
       if (_currentStep == 1) {
         Navigator.push(
           context,
@@ -91,68 +95,52 @@ class _AddNewScreenState extends State<AddNewScreen> {
                 ],
               ),
               const SizedBox(height: 16),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.orange,
-                ),
-                child: buildSectionTitle("Name"),
-              ),
+              SectionTitle(title: "Name"),
               const SizedBox(height: 5),
-              buildTextField("Name your recipe"),
+              CustomTextField(hint: "Name your recipe"),
               const SizedBox(height: 10),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.orange,
-                ),
-                child: buildSectionTitle("Number"),
-              ),
+              SectionTitle(title: "Number"),
               const SizedBox(height: 10),
               Row(
                 children: [
                   const Text("Serving for"),
                   const SizedBox(height: 16),
-                  buildNumberSelector(),
+                  NumberSelector(
+                    serving: _serving,
+                    onServingChanged: (value) {
+                      setState(() {
+                        _serving = value;
+                      });
+                    },
+                  ),
                 ],
               ),
               const SizedBox(height: 10),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.orange,
-                ),
-                child: buildSectionTitle("Cook Time"),
-              ),
+              SectionTitle(title: "Cook Time"),
               const SizedBox(height: 10),
               Row(
                 children: [
-                  buildTimeField("h"),
+                  TimeField(label: "h"),
                   const SizedBox(width: 10),
-                  buildTimeField("m"),
+                  TimeField(label: "m"),
                 ],
               ),
               const SizedBox(height: 10),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.orange,
-                ),
-                child: buildSectionTitle("Difficulty"),
+              SectionTitle(title: "Difficulty"),
+              const SizedBox(height: 10),
+              DifficultySelector(
+                selectedDifficulty: _selectedDifficulty,
+                onDifficultyChanged: (index) {
+                  setState(() {
+                    _selectedDifficulty = index;
+                  });
+                },
               ),
               const SizedBox(height: 10),
-              buildDifficultySelector(),
-              const SizedBox(height: 10),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.orange,
-                ),
-                child: buildSectionTitle("Dish Type"),
-              ),
+              SectionTitle(title: "Dish Type"),
               const SizedBox(height: 8),
-              buildChipSelector(
-                [
+              BuildChipSelectorWidget(
+                options: [
                   'Breakfast',
                   'Lunch',
                   'Snack',
@@ -161,17 +149,17 @@ class _AddNewScreenState extends State<AddNewScreen> {
                   'Dinner',
                   'Appetizers'
                 ],
-                _selectedDishTypes,
+                selectedOptions: _selectedDishTypes,
+                onSelectionChanged: (selectedOptions) {
+                  setState(() {
+                    _selectedDishTypes.clear();
+                    _selectedDishTypes.addAll(selectedOptions);
+                  });
+                },
               ),
               const SizedBox(height: 20),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.orange,
-                ),
-                child: buildSectionTitle("Hashtags"),
-              ),
-              buildTextField("#egg #Vegan #Sugarfree #lowfat"),
+              SectionTitle(title: "Hashtags"),
+              CustomTextField(hint: "#egg #Vegan #Sugarfree #lowfat"),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _nextStep,
@@ -191,113 +179,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget buildSectionTitle(String title) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Align(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildTextField(String hint) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextField(
-        decoration: InputDecoration(
-          filled: true,
-          hintText: hint,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildNumberSelector() {
-    return Row(
-      children: [
-        IconButton(
-          icon: const Icon(Icons.remove),
-          onPressed: () {
-            setState(() {
-              if (_serving > 1) _serving--;
-            });
-          },
-        ),
-        Text('$_serving'),
-        IconButton(
-          icon: const Icon(Icons.add),
-          onPressed: () {
-            setState(() {
-              _serving++;
-            });
-          },
-        ),
-      ],
-    );
-  }
-
-  Widget buildTimeField(String label) {
-    return Expanded(
-      child: TextField(
-        decoration: InputDecoration(
-          hintText: label,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildDifficultySelector() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: ['Easy', 'Medium', 'Hard'].asMap().entries.map((entry) {
-        int index = entry.key;
-        String difficulty = entry.value;
-        return ChoiceChip(
-          label: Text(difficulty),
-          selected: _selectedDifficulty == index,
-          onSelected: (selected) {
-            setState(() {
-              _selectedDifficulty = index;
-            });
-          },
-        );
-      }).toList(),
-    );
-  }
-
-  Widget buildChipSelector(List<String> options, List<String> selectedOptions) {
-    return Wrap(
-      spacing: 8.0,
-      children: options.map((option) {
-        return FilterChip(
-          label: Text(option),
-          selected: selectedOptions.contains(option),
-          onSelected: (selected) {
-            setState(() {
-              selected
-                  ? selectedOptions.add(option)
-                  : selectedOptions.remove(option);
-            });
-          },
-        );
-      }).toList(),
+      bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 }
