@@ -78,8 +78,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar:
-          CustomBottomNavigationBar(), // Updated with custom bottom navigation
-    );
+       );
   }
 }

@@ -79,8 +79,7 @@ class _IngredientsState extends State<Ingredients> {
           ],
         ),
       ),
-      bottomNavigationBar:
-          CustomBottomNavigationBar(), // Updated with custom bottom navigation
-    );
+    
+        );
   }
 }

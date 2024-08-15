@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:formz/formz.dart';
 import 'package:retsept_cherno/ui/screens/home_Screen.dart';
+import '../../../../../ui/widgets/bottom_navigation_bar.dart';
 import '../register.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -59,7 +60,7 @@ class _RegisterFormState extends State<RegisterForm> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeScreen(),
+                  builder: (context) => TabBoxScreen(),
                 ),
               ); // Example
             }
