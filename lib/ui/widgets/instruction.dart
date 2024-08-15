@@ -69,8 +69,7 @@ class _InstructionsScreenState extends State<InstructionsScreen> {
           ],
         ),
       ),
-      bottomNavigationBar:
-          CustomBottomNavigationBar(), // Updated with custom bottom navigation
+     
     );
   }
 }

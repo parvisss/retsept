@@ -11,6 +11,8 @@ import 'package:retsept_cherno/ui/screens/profile_screen.dart';
 import 'package:retsept_cherno/ui/screens/splash_screen1.dart';
 import 'package:user_repository/user_repostory.dart';
 
+import 'ui/widgets/bottom_navigation_bar.dart';
+
 class App extends StatefulWidget {
   const App({super.key});
 
@@ -99,7 +101,7 @@ class _AppViewState extends State<AppView> {
             switch (state.status) {
               case AuthenticationStatus.authenticated:
                 _navigator.pushReplacement(
-                  MaterialPageRoute(builder: (ctx) => const HomeScreen()),
+                  MaterialPageRoute(builder: (ctx) => const TabBoxScreen()),
                 );
                 break;
               case AuthenticationStatus.unauthenticated:

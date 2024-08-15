@@ -178,7 +178,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: CustomBottomNavigationBar(),
+     
 
     );
   }

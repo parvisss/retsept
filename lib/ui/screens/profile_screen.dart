@@ -85,7 +85,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SilverFillReaminingWidget(),
           ],
         ),
-        bottomNavigationBar: CustomBottomNavigationBar(),
+       
       ),
     );
   }
