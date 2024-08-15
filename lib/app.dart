@@ -86,8 +86,6 @@ class _AppViewState extends State<AppView> {
       builder: (context, child) {
         return BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
-            print(state.status);
-            print("____________________________________");
             switch (state.status) {
               case AuthenticationStatus.authenticated:
                 _navigator.pushReplacement(
@@ -96,7 +94,7 @@ class _AppViewState extends State<AppView> {
                 break;
               case AuthenticationStatus.unauthenticated:
                 _navigator.pushReplacement(
-                  MaterialPageRoute(builder: (ctx) => const LoginPage()),
+                  MaterialPageRoute(builder: (ctx) => const HomeScreen()),
                 );
                 break;
               case AuthenticationStatus.initial:
