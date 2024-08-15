@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:retsept_cherno/ui/screens/tadbox_screen.dart';
+import 'package:retsept_cherno/ui/screens/tab_box_screen.dart';
 
 import 'package:retsept_cherno/ui/widgets/recipe_screen.dart';
 

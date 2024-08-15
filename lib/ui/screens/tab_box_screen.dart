@@ -104,8 +104,6 @@ class _TabBoxScreenState extends State<TabBoxScreen> {
       body: _screens[_selectedIndex],
       bottomNavigationBar: ConvexAppBar(
         elevation: 10,
-        curveSize: 100,
-        height: 70,
         activeColor: Colors.white,
         items: [
           TabItem(
@@ -115,11 +113,10 @@ class _TabBoxScreenState extends State<TabBoxScreen> {
           TabItem(
               icon: SvgPicture.asset(
                 'assets/svg/add_new.svg',
-             
               ),
               title: 'Add New'),
+          TabItem(icon: Icons.save, title: 'Save'),
           TabItem(icon: Icons.search, title: 'Search'),
-          TabItem(icon: Icons.no_food, title: 'Add Recipe'),
           TabItem(icon: Icons.people, title: 'Profile'),
         ],
         onTap: (int index) {
