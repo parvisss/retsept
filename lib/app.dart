@@ -57,7 +57,6 @@ class _AppState extends State<App> {
             lazy: false,
             create: (_) => AuthenticationBloc(
               authenticationRepository: _authenticationRepository,
-              userRepository: _userRepository,
             )..add(AuthenticationSubscriptionRequested()),
           ),
         ],
@@ -87,6 +86,8 @@ class _AppViewState extends State<AppView> {
       builder: (context, child) {
         return BlocListener<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
+            print(state.status);
+            print("____________________________________");
             switch (state.status) {
               case AuthenticationStatus.authenticated:
                 _navigator.pushReplacement(

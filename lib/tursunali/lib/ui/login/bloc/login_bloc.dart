@@ -5,7 +5,6 @@ import 'package:formz/formz.dart';
 import 'package:retsept_cherno/tursunali/lib/ui/login/models/email.dart';
 import 'package:retsept_cherno/tursunali/lib/ui/login/models/password.dart';
 
-
 part 'login_event.dart';
 part 'login_state.dart';
 
@@ -53,14 +52,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) async {
     if (state.isValid) {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+      print("_____ASDFGNHffvfvvP");
       try {
         await _authenticationRepository.logIn(
           email: state.email.value,
           password: state.password.value,
         );
-        
+
         emit(state.copyWith(status: FormzSubmissionStatus.success));
+        print("_e____ASDFGNHffvfvvP");
       } catch (_) {
+        print("___B__ASDFGNHffvfvvP");
         emit(state.copyWith(status: FormzSubmissionStatus.failure));
       }
     }

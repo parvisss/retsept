@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:formz/formz.dart';
+import 'package:retsept_cherno/ui/screens/home_Screen.dart';
 import '../register.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -55,7 +56,12 @@ class _RegisterFormState extends State<RegisterForm> {
 
             if (state.status.isSuccess) {
               // Handle navigation or show a success message
-              Navigator.pushReplacementNamed(context, '/home'); // Example
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ),
+              ); // Example
             }
           },
           builder: (context, state) {
