@@ -10,7 +10,6 @@ import 'package:retsept_cherno/tursunali/lib/services/auth_service.dart/authenti
 import 'package:retsept_cherno/tursunali/lib/services/user_service/user_service.dart';
 import 'package:retsept_cherno/tursunali/lib/ui/login/views/login_page.dart';
 import 'package:retsept_cherno/ui/screens/home_Screen.dart';
-import 'package:retsept_cherno/ui/screens/splash_screen1.dart';
 import 'package:user_repository/user_repostory.dart';
 
 class App extends StatefulWidget {
@@ -87,34 +86,32 @@ class AppView extends StatefulWidget {
 class _AppViewState extends State<AppView> {
   final _navigatorKey = GlobalKey<NavigatorState>();
 
+  NavigatorState get _navigator => _navigatorKey.currentState!;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: _navigatorKey,
-      home: BlocListener<AuthenticationBloc, AuthenticationState>(
-        listener: (context, state) {
-          switch (state.status) {
-            case AuthenticationStatus.authenticated:
-              _navigatorKey.currentState!.pushReplacement(
-                  MaterialPageRoute(builder: (ctx) => const HomeScreen()));
-              break;
-            case AuthenticationStatus.unauthenticated:
-              _navigatorKey.currentState!.pushReplacement(
-                  MaterialPageRoute(builder: (ctx) => const LoginPage()));
-              break;
-            case AuthenticationStatus.initial:
-              // Could show a splash screen or similar initial view
-              break;
-            case AuthenticationStatus.error:
-            case AuthenticationStatus.loading:
-              // Handle these cases if needed
-              break;
-          }
-        },
-        child:
-            const Splash1Screen(), // Replace with a splash screen or similar.
-      ),
+      builder: (context, child) {
+        return BlocListener<AuthenticationBloc, AuthenticationState>(
+          listener: (context, state) {
+            switch (state.status) {
+              case AuthenticationStatus.authenticated:
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (ctx) => const HomeScreen()));
+              case AuthenticationStatus.unauthenticated:
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (ctx) => const LoginPage()));
+              case AuthenticationStatus.initial:
+                break;
+              case AuthenticationStatus.error:
+              case AuthenticationStatus.loading:
+            }
+          },
+          child: child,
+        );
+      },
     );
   }
 }

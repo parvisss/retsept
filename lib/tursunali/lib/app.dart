@@ -102,6 +102,7 @@ class _AppViewState extends State<AppView> {
                 break;
               case AuthenticationStatus.error:
               case AuthenticationStatus.loading:
+                // Handle additional cases if needed
                 break;
             }
           },
