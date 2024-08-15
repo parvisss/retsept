@@ -23,7 +23,6 @@ dependencies:
   carousel_slider: ^5.0.0
   flutter_svg: ^2.0.10+1
 
-
   easy_stepper: ^0.8.5+1
   share_plus: ^10.0.0
   formz: ^0.7.0
@@ -36,7 +35,6 @@ dependencies:
   shared_preferences: ^2.3.1
   flutter_screenutil: ^5.9.3
   flutter_secure_storage: ^4.2.1
-
 
 dev_dependencies:
   flutter_test:
