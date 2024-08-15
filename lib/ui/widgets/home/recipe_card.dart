@@ -1,10 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
+import 'package:retsept_cherno/bloc/retsept/retsept_event.dart';
 import 'package:retsept_cherno/data/models/coment_model.dart';
 import 'package:retsept_cherno/data/models/retsept_model.dart';
+import 'package:retsept_cherno/ui/widgets/home/controller/connection_with_service.dart';
 
-class RecipeCard extends StatelessWidget {
+class RecipeCard extends StatefulWidget {
   const RecipeCard({super.key, required this.retsept});
   final RetseptModel retsept;
+
+  @override
+  State<RecipeCard> createState() => _RecipeCardState();
+}
+
+class _RecipeCardState extends State<RecipeCard> {
+  int likesLocal = 0;
+  bool liked = false;
+  @override
+  void initState() {
+    context.read<RetseptBloc>().add(LoadRetsepts());
+    likesLocal = widget.retsept.likes;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +39,7 @@ class RecipeCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.network(
-                  retsept.image,
+                  widget.retsept.image,
                   fit: BoxFit.cover,
                   width: double.infinity,
                   height: 200.0,
@@ -42,7 +60,7 @@ class RecipeCard extends StatelessWidget {
                       const Icon(Icons.star, color: Colors.yellow, size: 12.0),
                       const SizedBox(width: 4.0),
                       Text(
-                        retsept.rate.toString(),
+                        widget.retsept.rate.toString(),
                         style: const TextStyle(
                           color: Colors.white,
                           fontSize: 12.0,
@@ -58,9 +76,27 @@ class RecipeCard extends StatelessWidget {
                 child: Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.favorite_border,
-                          color: Colors.white),
-                      onPressed: () {},
+                      icon: Icon(
+                        liked
+                            ? Icons.favorite_border
+                            : Icons
+                                .favorite, // Update icon based on liked state
+                        color: Colors.white,
+                      ),
+                      onPressed: () async {
+                        final updatedLikes =
+                            await ConnectionWithService().handleLikeButton(
+                          retseptId: widget.retsept.id,
+                          likesLocal: likesLocal,
+                          isLike: liked,
+                        );
+
+                        setState(() {
+                          likesLocal =
+                              updatedLikes; // Update the local like count
+                          liked = !liked; // Toggle the liked state
+                        });
+                      },
                     ),
                     IconButton(
                       icon: const Icon(Icons.share, color: Colors.white),
@@ -118,7 +154,7 @@ class RecipeCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(8.0),
             ),
             child: Text(
-              retsept.name,
+              widget.retsept.name,
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
@@ -132,18 +168,19 @@ class RecipeCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               _buildInfoChip(
-                  Icons.local_fire_department, retsept.dietaryTarget),
-              _buildInfoChip(Icons.fastfood, retsept.difficulty),
-              _buildInfoChip(Icons.timer, retsept.preparationTime),
+                  Icons.local_fire_department, widget.retsept.dietaryTarget),
+              _buildInfoChip(Icons.fastfood, widget.retsept.difficulty),
+              _buildInfoChip(Icons.timer, widget.retsept.preparationTime),
             ],
           ),
           const SizedBox(height: 16.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              _buildInfoChip(Icons.favorite, retsept.likes.toString()),
+              _buildInfoChip(Icons.favorite, likesLocal.toString()),
               const SizedBox(width: 10),
-              _buildInfoChip(Icons.comment, retsept.coments.length.toString()),
+              _buildInfoChip(
+                  Icons.comment, widget.retsept.coments.length.toString()),
             ],
           ),
           const SizedBox(height: 16.0),
@@ -167,11 +204,11 @@ class RecipeCard extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ListView.builder(
-                          itemCount: retsept.preparation.length,
+                          itemCount: widget.retsept.preparation.length,
                           itemBuilder: (ctx, index) {
                             // print(retsept.coments);
                             return _buildPreperation(
-                              retsept.preparation[index],
+                              widget.retsept.preparation[index],
                             );
                           },
                           padding: const EdgeInsets.all(8.0),
@@ -179,22 +216,23 @@ class RecipeCard extends StatelessWidget {
                       ),
                       Expanded(
                         child: ListView.builder(
-                          itemCount: retsept.ingredients.length,
+                          itemCount: widget.retsept.ingredients.length,
                           itemBuilder: (ctx, index) {
                             // print(retsept.coments);
                             return _buildIngredients(
-                                retsept.ingredients[index]);
+                                widget.retsept.ingredients[index]);
                           },
                           padding: const EdgeInsets.all(8.0),
                         ),
                       ),
                       Expanded(
                         child: ListView.builder(
-                          itemCount: retsept.coments.length,
+                          itemCount: widget.retsept.coments.length,
                           itemBuilder: (ctx, index) {
                             // print(retsept.coments);
                             return _buildComment(
-                              ComentModel.fromJson(retsept.coments[index]),
+                              ComentModel.fromJson(
+                                  widget.retsept.coments[index]),
                             );
                           },
                           padding: const EdgeInsets.all(8.0),

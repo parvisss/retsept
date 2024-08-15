@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_event.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_state.dart';
-import 'package:retsept_cherno/services/firestore/retsept_firebase.dart';
+import 'package:retsept_cherno/services/firestore/retsept/retsept_firebase.dart';
 import 'package:retsept_cherno/ui/widgets/home/classic_victoria.dart';
 
 class HomeScreen extends StatefulWidget {
