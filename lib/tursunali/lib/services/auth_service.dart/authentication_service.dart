@@ -18,7 +18,7 @@ class FirebaseAuthenticationService extends AuthenticationService {
           "returnSecureToken": true,
         },
       );
-
+      print(response.data);
       return Auth.fromMap(response.data);
     } on DioException catch (e) {
       throw (e.response?.data);
@@ -41,8 +41,35 @@ class FirebaseAuthenticationService extends AuthenticationService {
       print(response);
       return Auth.fromMap(response.data);
     } on DioException catch (e) {
+      print("Bu dio xatoligi: $e");
       throw (e.response?.data);
     } catch (e) {
+      print("Bu dio xatoligi: $e");
+
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>?> getUserInfo() async {
+    final url =
+        "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=$_apiKey";
+
+    try {
+      final token = await LocalDb.getIdToken();
+      if (token != null) {
+        final response = await _dio.post(
+          url,
+          data: {
+            'idToken': token,
+          },
+        );
+        print("Bu auth pakcagedagi getUserInfo response: $response");
+        return response.data;
+      }
+      return null;
+    } catch (e) {
+      print("GetUserInfo da Xatolik: $e");
       rethrow;
     }
   }
