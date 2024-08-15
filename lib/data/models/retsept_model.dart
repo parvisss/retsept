@@ -13,7 +13,7 @@ class RetseptModel {
   final int likes;
   final String image;
   final String video;
-  final List<String> coments;
+  final List<Map<String, dynamic>> coments;
 
   RetseptModel({
     required this.id,
@@ -50,9 +50,9 @@ class RetseptModel {
       likes: json['likes'] ?? 0,
       image: json['image'] ?? '',
       video: json['video'] ?? '',
-      coments: json['coments'] is List
-          ? List<String>.from(json['coments'])
-          : (json['coments'] as String).split('/'),
+      coments: List<Map<String, dynamic>>.from(
+        json['coments'] ?? [],
+      ),
     );
   }
 
@@ -74,7 +74,7 @@ class RetseptModel {
       'image': image,
       'video': video,
       'coments': coments
-          .join('/'), // Join the list into a string with '/' as the separator
+      // Join the list into a string with '/' as the separator
     };
   }
 }

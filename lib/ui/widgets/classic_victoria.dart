@@ -38,7 +38,9 @@ class ClassicVictoria extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return const RecipeCard();
+                                    return RecipeCard(
+                                      retsept: retsept,
+                                    );
                                   },
                                 ),
                               );
@@ -93,6 +95,7 @@ class ClassicVictoria extends StatelessWidget {
       },
       child: Card(
         child: Container(
+          clipBehavior: Clip.hardEdge,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
@@ -113,8 +116,8 @@ class ClassicVictoria extends StatelessWidget {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/classic.png', //! change image
+                      child: Image.network(
+                        retsept.image,
                         fit: BoxFit.cover,
                         width: 150.0,
                         height: 230.0,
