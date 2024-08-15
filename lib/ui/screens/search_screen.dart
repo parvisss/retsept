@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:retsept_cherno/ui/screens/tadbox_screen.dart';
 import 'package:retsept_cherno/ui/widgets/build_chef_list_widget.dart';
 import 'package:retsept_cherno/ui/widgets/build_griw_view_widget.dart';
 import 'package:retsept_cherno/ui/widgets/build_tag_list_widget.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   SearchScreen({super.key});
+
+  @override
+  _SearchScreenState createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  String _searchQuery = '';
 
   @override
   Widget build(BuildContext context) {
@@ -40,8 +46,13 @@ class SearchScreen extends StatelessWidget {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
                         ),
-                        child: const TextField(
-                          decoration: InputDecoration(
+                        child: TextField(
+                          onChanged: (query) {
+                            setState(() {
+                              _searchQuery = query;
+                            });
+                          },
+                          decoration: const InputDecoration(
                             hintText: 'Search',
                             prefixIcon: Icon(Icons.search),
                             border: InputBorder.none,
@@ -76,7 +87,7 @@ class SearchScreen extends StatelessWidget {
               // Tab bar
               const TabBar(
                 labelColor: Colors.black,
-                unselectedLabelColor: Colors.grey,
+                unselectedLabelColor: Colors.white,
                 tabs: [
                   Tab(text: 'Recipes'),
                   Tab(text: 'Chefs'),
@@ -88,16 +99,15 @@ class SearchScreen extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    BuildGridViewWidget(),
-                    BuildChefListWidget(),
-                    BuildTagListWidget(),
+                    BuildGridViewWidget(searchQuery: _searchQuery),
+                    BuildChefListWidget(searchQuery: _searchQuery),
+                    BuildTagListWidget(searchQuery: _searchQuery),
                   ],
                 ),
               ),
             ],
           ),
         ),
-      
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
-import 'package:retsept_cherno/ui/screens/tadbox_screen.dart';
+import 'package:retsept_cherno/ui/screens/tab_box_screen.dart';
 import 'package:retsept_cherno/ui/widgets/build_chip_selector_widget.dart';
 import 'package:retsept_cherno/ui/widgets/difficulty_selector.dart';
 import 'package:retsept_cherno/ui/widgets/ingredients.dart';
