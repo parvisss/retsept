@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retsept_cherno/ui/widgets/build_recipe_card_widget.dart';
+import 'package:retsept_cherno/ui/widgets/search/build_recipe_card_widget.dart';
 
 class BuildGridViewWidget extends StatelessWidget {
   // Corrected class name

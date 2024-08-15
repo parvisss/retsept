@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:retsept_cherno/data/models/retsept_model.dart';
-import 'package:retsept_cherno/ui/widgets/recipe_card.dart';
+import 'package:retsept_cherno/ui/widgets/home/recipe_card.dart';
 
 class ClassicVictoria extends StatelessWidget {
   const ClassicVictoria({super.key, required this.retsept});
