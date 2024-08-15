@@ -28,6 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final String profileUrl = 'https://t.me/Flutter_with_Javohir';
 
     // Profilni ulashish
+
     Share.share('Check out this amazing chef profile!\n$profileUrl');
 
     // Profil sahifasiga o'tish

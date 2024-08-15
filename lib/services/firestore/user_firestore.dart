@@ -8,6 +8,7 @@ class UserFirestore {
 
   //? Add a new user to the database
   Future<void> addUser(UserModel user) async {
+    
     try {
       final Map<String, dynamic> userJson = user.toJson();
       final response = await _dio.post("$_baseUrl/users.json", data: userJson);
