@@ -11,7 +11,7 @@ import 'package:retsept_cherno/ui/screens/profile_screen.dart';
 import 'package:retsept_cherno/ui/screens/splash_screen1.dart';
 import 'package:user_repository/user_repostory.dart';
 
-import 'ui/screens/tadbox_screen.dart';
+import 'ui/screens/tab_box_screen.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
