@@ -1,10 +1,6 @@
 import 'package:authentication_repository/authentication_repostory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
-import 'package:retsept_cherno/bloc/user/user_bloc.dart';
-import 'package:retsept_cherno/services/firestore/retsept_firebase.dart';
-import 'package:retsept_cherno/services/firestore/user_firestore.dart';
 import 'package:retsept_cherno/tursunali/lib/bloc/authentication/bloc/authentication_bloc.dart';
 import 'package:retsept_cherno/tursunali/lib/services/auth_service.dart/authentication_service.dart';
 import 'package:retsept_cherno/tursunali/lib/services/user_service/user_service.dart';
@@ -63,12 +59,6 @@ class _AppState extends State<App> {
               userRepository: _userRepository,
             )..add(AuthenticationSubscriptionRequested()),
           ),
-          BlocProvider(
-            create: (context) => RetseptBloc(RetseptFirebase()),
-          ),
-          BlocProvider(
-            create: (context) => UserBloc(UserFirestore()),
-          ),
         ],
         child: const AppView(),
       ),
@@ -98,19 +88,27 @@ class _AppViewState extends State<AppView> {
           listener: (context, state) {
             switch (state.status) {
               case AuthenticationStatus.authenticated:
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (ctx) => const HomeScreen()));
+                _navigator.pushReplacement(
+                  MaterialPageRoute(builder: (ctx) => const HomeScreen()),
+                );
+                break;
               case AuthenticationStatus.unauthenticated:
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (ctx) => const LoginPage()));
+                _navigator.pushReplacement(
+                  MaterialPageRoute(builder: (ctx) => const LoginPage()),
+                );
+                break;
               case AuthenticationStatus.initial:
                 break;
               case AuthenticationStatus.error:
               case AuthenticationStatus.loading:
+                break;
             }
           },
           child: child,
         );
+      },
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx) => const Splash1Screen());
       },
     );
   }
