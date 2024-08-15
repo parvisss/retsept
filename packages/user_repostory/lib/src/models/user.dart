@@ -1,46 +1,54 @@
-import 'package:equatable/equatable.dart';
+class UserModel {
+  String id;
+  String name;
+  String email;
+  String? password;
+  List<dynamic>? saved;
+  List<dynamic>? favorites;
+  String? image;
+  String? favoriteMeal;
+  double? rate;
 
-class User extends Equatable {
-  const User({
+  UserModel({
     required this.id,
-    this.email,
-    this.token,
-    this.refreshToken,
-    this.expiresIn,
+    required this.name,
+    required this.email,
+    this.password,
+    this.saved,
+    this.favorites,
+    this.image,
+    this.favoriteMeal,
+    this.rate,
   });
 
-  final String id;
-  final String? email;
-  final String? token;
-  final String? refreshToken;
-  final DateTime? expiresIn;
+  List<Object?> get props =>
+      [id, email, name, password, saved, favorites, image, favoriteMeal, rate];
 
-  @override
-  List<Object?> get props => [id, email, token, refreshToken, expiresIn];
-
-  static const empty = User(id: '');
-
-  Map<String, dynamic> toMap() {
-    final result = <String, dynamic>{};
-
-    result.addAll({'id': id});
-    if (email != null) result.addAll({'email': email});
-    if (token != null) result.addAll({'token': token});
-    if (refreshToken != null) result.addAll({'refreshToken': refreshToken});
-    if (expiresIn != null) result.addAll({'expiresIn': expiresIn!.toIso8601String()});
-
-    return result;
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      email: json['email'] as String,
+      password: json['password'] as String?,
+      saved: json['saved'] as List<dynamic>?,
+      favorites: json['favorites'] as List<dynamic>?,
+      image: json['image'] as String?,
+      favoriteMeal: json['favoriteMeal'] as String?,
+      rate: (json['rate'] as num?)?.toDouble(),
+    );
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
-      id: map['id'] ?? '',
-      email: map['email'],
-      token: map['idToken'],
-      refreshToken: map['refreshToken'],
-      expiresIn: map['expiresIn'] != null
-          ? DateTime.parse(map['expiresIn'])
-          : null,
-    );
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'email': email,
+      'password': password,
+      'saved': saved,
+      'favorites': favorites,
+      'image': image,
+      'favoriteMeal': favoriteMeal,
+      'rate': rate,
+    };
   }
 }

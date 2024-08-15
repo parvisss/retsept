@@ -21,7 +21,6 @@ class _AppState extends State<App> {
   late final UserService _userService;
   late final AuthenticationRepository _authenticationRepository;
   late final UserRepository _userRepository;
-
   @override
   void initState() {
     super.initState();
@@ -57,6 +56,7 @@ class _AppState extends State<App> {
             lazy: false,
             create: (_) => AuthenticationBloc(
               authenticationRepository: _authenticationRepository,
+
             )..add(AuthenticationSubscriptionRequested()),
           ),
         ],
@@ -89,7 +89,7 @@ class _AppViewState extends State<AppView> {
             print(state.status);
             print("____________________________________");
             switch (state.status) {
-              case AuthenticationStatus.authenticated:
+              case AuthenticationStatus.authenticated  :
                 _navigator.pushReplacement(
                   MaterialPageRoute(builder: (ctx) => const HomeScreen()),
                 );

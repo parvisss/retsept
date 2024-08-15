@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:retsept_cherno/ui/widgets/latest_recipe_card.dart';
 import 'package:retsept_cherno/ui/widgets/recept_widget.dart';
 
 class SilverFillReaminingWidget extends StatefulWidget {

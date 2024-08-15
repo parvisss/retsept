@@ -10,7 +10,6 @@ class SliverToBoxAdapterWidget extends StatefulWidget {
 }
 
 class _SliverToBoxAdapterWidgetState extends State<SliverToBoxAdapterWidget> {
-  @override
   bool isFollowing = false;
   int followingCount = 0;
   final ScrollController _scrollController = ScrollController();

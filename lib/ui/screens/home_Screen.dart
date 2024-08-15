@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_event.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_state.dart';
 import 'package:retsept_cherno/services/firestore/retsept_firebase.dart';
-import 'package:retsept_cherno/ui/screens/add_new_screen.dart';
-import 'package:retsept_cherno/ui/screens/profile_screen.dart';
-import 'package:retsept_cherno/ui/screens/save_screen.dart';
-import 'package:retsept_cherno/ui/screens/search_screen.dart';
 import 'package:retsept_cherno/ui/widgets/bottom_navigation_bar.dart';
 import 'package:retsept_cherno/ui/widgets/classic_victoria.dart';
 

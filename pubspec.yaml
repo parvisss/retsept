@@ -36,6 +36,7 @@ dependencies:
   shared_preferences: ^2.3.1
   flutter_screenutil: ^5.9.3
   flutter_secure_storage: ^4.2.1
+  share_it: ^0.7.0
 
 
 dev_dependencies:

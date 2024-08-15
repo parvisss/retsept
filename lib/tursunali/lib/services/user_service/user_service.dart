@@ -21,26 +21,26 @@ class FirebaseUserService extends UserService {
       print(e);
       throw (e.response?.data);
     } catch (e) {
-   
       rethrow;
     }
   }
 
-
   @override
-  Future<User> getUser(String id) async {
-  try {
-    print('Fetching user with id: $id'); 
-    final response = await _dio.get("/users/$id.json");
-    final userMap = response.data;
-    userMap['id'] = id;
-    
-    return User.fromMap(userMap);
-  } on DioException catch (e) { // Debug print
-    throw (e.response?.data);
-  } catch (e) {  // Debug print
-    rethrow;
-  }
-}
+  Future<UserModel> getUser(String id) async {
+    try {
+      print("____123______");
+      
+      print('Fetching user with id: $id');
+      final response = await _dio.get("/users/$id.json");
+      print("ResponSE$response");
+      final userMap = response.data;
+      userMap['id'] = id;
 
+      return UserModel.fromJson(userMap);
+    } on DioException catch (e) {
+      throw (e.response?.data);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:retsept_cherno/data/models/user_model.dart';
+import 'package:user_repository/user_repostory.dart';
 
 class UserFirestore {
   final String _baseUrl =
@@ -71,3 +71,4 @@ class UserFirestore {
     }
   }
 }
+ 

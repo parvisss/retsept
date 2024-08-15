@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:retsept_cherno/data/models/user_model.dart';
+import 'package:user_repository/user_repostory.dart';
 
 abstract class UserEvent extends Equatable {
   @override
@@ -13,6 +13,4 @@ class AddUserEvent extends UserEvent {
   @override
   List<Object> get props => [user];
 }
-
-//event to fetch user data
 class FetchUserDataEvent extends UserEvent {}

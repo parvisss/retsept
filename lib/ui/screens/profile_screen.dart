@@ -1,12 +1,9 @@
 
+import 'package:flutter/material.dart';
 import 'package:retsept_cherno/ui/widgets/bottom_navigation_bar.dart';
 import 'package:retsept_cherno/ui/widgets/followers_and_circle_avatar_following_widget.dart';
-import 'package:retsept_cherno/ui/widgets/pea_and_ricotta.dart';
-import 'package:retsept_cherno/ui/widgets/recipe_card.dart';
-import 'package:retsept_cherno/ui/widgets/recipe_screen.dart';
 import 'package:retsept_cherno/ui/widgets/silver_fill_reamining_widget.dart';
 import 'package:share_plus/share_plus.dart';
-
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
