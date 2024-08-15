@@ -1,32 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:retsept_cherno/ui/widgets/bottom_navigation_bar.dart';
+import 'package:retsept_cherno/ui/widgets/build_chef_list_widget.dart';
+import 'package:retsept_cherno/ui/widgets/build_griw_view_widget.dart';
+import 'package:retsept_cherno/ui/widgets/build_tag_list_widget.dart';
 
 class SearchScreen extends StatelessWidget {
-  final List<String> imagePaths = [
-    'assets/food8.png',
-    'assets/food2.png',
-    'assets/food3.png',
-    'assets/food4.png',
-    'assets/food5.png',
-    'assets/food6.png',
-  ];
-
-  final List<Map<String, String>> chefs = [
-    {'name': 'Mark Salvador', 'image': 'assets/chef3.png'},
-    {'name': 'Martin Robert', 'image': 'assets/chef2.png'},
-    {'name': 'Melisa Anne', 'image': 'assets/chef2.png'},
-    {'name': 'Dave Robert', 'image': 'assets/chef.png'},
-  ];
-
-  final List<String> tags = [
-    '#egg',
-    '#eggrecipe',
-    '#eggfast',
-    '#eggsandwich',
-    '#eggrolls',
-  ];
-
-   SearchScreen({super.key});
+  SearchScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -106,120 +86,18 @@ class SearchScreen extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    _buildGridView(),
-                    _buildChefList(),
-                    _buildTagList(),
+                    BuildGridViewWidget(),
+                    BuildChefListWidget(),
+                    BuildTagListWidget(),
                   ],
                 ),
               ),
             ],
           ),
         ),
+        bottomNavigationBar:
+            CustomBottomNavigationBar(), // Updated with custom bottom navigation
       ),
-    );
-  }
-
-  Widget _buildGridView() {
-    return GridView.builder(
-      padding: const EdgeInsets.all(16.0),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 16.0,
-        mainAxisSpacing: 16.0,
-      ),
-      itemCount: imagePaths.length,
-      itemBuilder: (context, index) {
-        return _buildRecipeCard(imagePaths[index]);
-      },
-    );
-  }
-
-  Widget _buildRecipeCard(String imagePath) {
-    return Stack(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(8.0),
-          child: Image.asset(
-            imagePath,
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
-          ),
-        ),
-        Positioned(
-          top: 8.0,
-          left: 8.0,
-          child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.7),
-              borderRadius: BorderRadius.circular(4.0),
-            ),
-            child: const Row(
-              children: [
-                Icon(Icons.star, color: Colors.yellow, size: 12.0),
-                SizedBox(width: 4.0),
-                Text(
-                  '4.8',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 8.0,
-          left: 8.0,
-          right: 8.0,
-          child: Container(
-            padding: const EdgeInsets.all(4.0),
-            color: Colors.black54,
-            child: const Text(
-              'Chocolate Cake with Buttercream Frosting',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 14.0,
-                fontWeight: FontWeight.bold,
-              ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildChefList() {
-    return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      itemCount: chefs.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: CircleAvatar(
-            backgroundImage: AssetImage(chefs[index]['image']!),
-          ),
-          title: Text(chefs[index]['name']!),
-        );
-      },
-    );
-  }
-
-  Widget _buildTagList() {
-    return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      itemCount: tags.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          leading: const CircleAvatar(
-            child: Icon(Icons.tag),
-          ),
-          title: Text(tags[index]),
-        );
-      },
     );
   }
 }

@@ -6,6 +6,7 @@
 
 #include "generated_plugin_registrant.h"
 
+
 #include <flutter_secure_storage/flutter_secure_storage_plugin.h>
 
 void fl_register_plugins(FlPluginRegistry* registry) {

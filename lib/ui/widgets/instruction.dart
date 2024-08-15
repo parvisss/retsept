@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:retsept_cherno/ui/widgets/bottom_navigation_bar.dart';
 import 'package:retsept_cherno/ui/widgets/recipe_screen.dart';
 
 class InstructionsScreen extends StatefulWidget {
@@ -68,6 +69,8 @@ class _InstructionsScreenState extends State<InstructionsScreen> {
           ],
         ),
       ),
+      bottomNavigationBar:
+          CustomBottomNavigationBar(), // Updated with custom bottom navigation
     );
   }
 }

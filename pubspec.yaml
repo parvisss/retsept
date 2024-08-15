@@ -25,6 +25,7 @@ dependencies:
 
 
   easy_stepper: ^0.8.5+1
+  share_plus: ^10.0.0
   formz: ^0.7.0
   animate_do: ^3.3.4
   flutter_spinkit: ^5.2.1
