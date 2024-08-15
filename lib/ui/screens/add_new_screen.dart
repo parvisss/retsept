@@ -20,7 +20,6 @@ class _AddNewScreenState extends State<AddNewScreen> {
   int _serving = 4;
   int _selectedDifficulty = 0;
   final List<String> _selectedDishTypes = [];
-  final List<String> _selectedDietaryTargets = [];
   int _currentStep = 0;
 
   void _nextStep() {
@@ -180,6 +179,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
         ),
       ),
       bottomNavigationBar: CustomBottomNavigationBar(),
+
     );
   }
 }

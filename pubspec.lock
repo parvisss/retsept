@@ -30,6 +30,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.7.0"
+  animate_do:
+    dependency: "direct main"
+    description:
+      name: animate_do
+      sha256: "7a3162729f0ea042f9dd84da217c5bde5472ad9cef644079929d4304a5dc4ca0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.3.4"
   archive:
     dependency: transitive
     description:
@@ -54,6 +62,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  authentication_repository:
+    dependency: "direct main"
+    description:
+      path: "packages/authentication_repository"
+      relative: true
+    source: path
+    version: "0.0.0"
   bloc:
     dependency: "direct main"
     description:
@@ -419,6 +434,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.0"
+  flutter_screenutil:
+    dependency: "direct main"
+    description:
+      name: flutter_screenutil
+      sha256: "8239210dd68bee6b0577aa4a090890342d04a136ce1c81f98ee513fc0ce891de"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.9.3"
+  flutter_secure_storage:
+    dependency: "direct main"
+    description:
+      name: flutter_secure_storage
+      sha256: "9f3dd2ac3b6875b0fde5b04734789c3ef35ba3965c18e99dd564a7a2f8056df6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.1"
+  flutter_spinkit:
+    dependency: "direct main"
+    description:
+      name: flutter_spinkit
+      sha256: d2696eed13732831414595b98863260e33e8882fc069ee80ec35d4ac9ddb0472
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.1"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -437,6 +476,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  formz:
+    dependency: "direct main"
+    description:
+      name: formz
+      sha256: a58eb48d84685b7ffafac1d143bf47d585bf54c7db89fe81c175dfd6e53201c7
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.0"
   frontend_server_client:
     dependency: transitive
     description:
@@ -669,6 +716,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
+
   path_provider_linux:
     dependency: transitive
     description:
@@ -765,6 +813,62 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  shared_preferences:
+    dependency: "direct main"
+    description:
+      name: shared_preferences
+      sha256: c272f9cabca5a81adc9b0894381e9c1def363e980f960fa903c604c471b22f68
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
+  shared_preferences_android:
+    dependency: transitive
+    description:
+      name: shared_preferences_android
+      sha256: a7e8467e9181cef109f601e3f65765685786c1a738a83d7fbbde377589c0d974
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
+  shared_preferences_foundation:
+    dependency: transitive
+    description:
+      name: shared_preferences_foundation
+      sha256: c4b35f6cb8f63c147312c054ce7c2254c8066745125264f0c88739c417fc9d9f
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.5.2"
+  shared_preferences_linux:
+    dependency: transitive
+    description:
+      name: shared_preferences_linux
+      sha256: "580abfd40f415611503cae30adf626e6656dfb2f0cee8f465ece7b6defb40f2f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
+  shared_preferences_platform_interface:
+    dependency: transitive
+    description:
+      name: shared_preferences_platform_interface
+      sha256: "57cbf196c486bc2cf1f02b85784932c6094376284b3ad5779d1b1c6c6a816b80"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
+  shared_preferences_web:
+    dependency: transitive
+    description:
+      name: shared_preferences_web
+      sha256: d2ca4132d3946fec2184261726b355836a82c33d7d5b67af32692aff18a4684e
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.2"
+  shared_preferences_windows:
+    dependency: transitive
+    description:
+      name: shared_preferences_windows
+      sha256: "94ef0f72b2d71bc3e700e025db3710911bd51a71cefb65cc609dd0d9a982e3c1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.1"
   shelf:
     dependency: transitive
     description:
@@ -914,6 +1018,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.2"
+  user_repository:
+    dependency: "direct main"
+    description:
+      path: "packages/user_repostory"
+      relative: true
+    source: path
+    version: "0.0.0"
   uuid:
     dependency: transitive
     description:
@@ -922,6 +1033,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.4.2"
+
   vector_graphics:
     dependency: transitive
     description:
@@ -1002,6 +1114,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.5.4"
+
   xdg_directories:
     dependency: transitive
     description:

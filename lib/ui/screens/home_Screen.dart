@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               }
               return const Center(
-                child: Text("Empty Data"),
+                child: Text("Empty  Data"),
               );
             }),
           ),
