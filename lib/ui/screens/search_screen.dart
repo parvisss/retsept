@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:retsept_cherno/ui/widgets/build_chef_list_widget.dart';
-import 'package:retsept_cherno/ui/widgets/build_griw_view_widget.dart';
-import 'package:retsept_cherno/ui/widgets/build_tag_list_widget.dart';
+import 'package:retsept_cherno/ui/widgets/search/build_chef_list_widget.dart';
+import 'package:retsept_cherno/ui/widgets/search/build_griw_view_widget.dart';
+import 'package:retsept_cherno/ui/widgets/search/build_tag_list_widget.dart';
 
 class SearchScreen extends StatefulWidget {
   SearchScreen({super.key});

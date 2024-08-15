@@ -4,7 +4,7 @@ import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_event.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_state.dart';
 import 'package:retsept_cherno/services/firestore/retsept_firebase.dart';
-import 'package:retsept_cherno/ui/widgets/classic_victoria.dart';
+import 'package:retsept_cherno/ui/widgets/home/classic_victoria.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     context.read<RetseptBloc>().add(LoadRetsepts());
-    
+
     super.initState();
   }
 
@@ -78,6 +78,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-       );
+    );
   }
 }
