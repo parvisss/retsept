@@ -1,10 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:retsept_cherno/ui/widgets/bottom_navigation_bar.dart';
 import 'package:retsept_cherno/ui/widgets/followers_and_circle_avatar_following_widget.dart';
 import 'package:retsept_cherno/ui/widgets/silver_fill_reamining_widget.dart';
 import 'package:share_plus/share_plus.dart';
-
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -26,9 +24,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void _shareProfile() {
-    const String profileUrl =
-        'build\\app\\outputs\\flutter-apk\\app-release.apk'; // Custom URL scheme
+    // Profil URL-manzili
+    final String profileUrl = 'https://t.me/Flutter_with_Javohir';
+
+    // Profilni ulashish
+
     Share.share('Check out this amazing chef profile!\n$profileUrl');
+
+    // Profil sahifasiga o'tish
+    Navigator.pushNamed(context, '/profile');
   }
 
   void _scrollToTop() {
@@ -64,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     isFollowing: isFollowing,
                     followingCount: followingCount,
                     toggleFollow: _toggleFollow,
-                    shareProfile: _shareProfile,
+                    shareProfile: () => _shareProfile(),
                   ),
                   const SizedBox(height: 24.0),
                   const TabBar(
@@ -75,15 +79,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Tab(text: 'Less Details'),
                     ],
                   ),
-
                 ],
               ),
             ),
-            SilverFillReaminingWidget(),
+            const SilverFillReaminingWidget(),
           ],
         ),
-        bottomNavigationBar:
-            CustomBottomNavigationBar(), // Updated with custom bottom navigation
+        bottomNavigationBar: CustomBottomNavigationBar(),
       ),
     );
   }
