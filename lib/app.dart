@@ -1,10 +1,11 @@
 import 'package:authentication_repository/authentication_repostory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
+import 'package:retsept_cherno/services/firestore/retsept_firebase.dart';
 import 'package:retsept_cherno/tursunali/lib/bloc/authentication/bloc/authentication_bloc.dart';
 import 'package:retsept_cherno/tursunali/lib/services/auth_service.dart/authentication_service.dart';
 import 'package:retsept_cherno/tursunali/lib/services/user_service/user_service.dart';
-import 'package:retsept_cherno/tursunali/lib/ui/login/views/login_page.dart';
 import 'package:retsept_cherno/ui/screens/home_Screen.dart';
 import 'package:retsept_cherno/ui/screens/profile_screen.dart';
 import 'package:retsept_cherno/ui/screens/splash_screen1.dart';
@@ -60,6 +61,11 @@ class _AppState extends State<App> {
               authenticationRepository: _authenticationRepository,
             )..add(AuthenticationSubscriptionRequested()),
           ),
+          BlocProvider<RetseptBloc>(
+            create: (context) => RetseptBloc(
+              RetseptFirebase(),
+            ),
+          )
         ],
         child: const AppView(),
       ),
