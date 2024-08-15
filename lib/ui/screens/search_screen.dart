@@ -13,7 +13,9 @@ class SearchScreen extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: Colors.blue,
+        ),
         body: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
