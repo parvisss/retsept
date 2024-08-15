@@ -1,4 +1,5 @@
 
+import 'package:flutter/material.dart';
 import 'package:retsept_cherno/ui/widgets/bottom_navigation_bar.dart';
 import 'package:retsept_cherno/ui/widgets/followers_and_circle_avatar_following_widget.dart';
 import 'package:retsept_cherno/ui/widgets/pea_and_ricotta.dart';
