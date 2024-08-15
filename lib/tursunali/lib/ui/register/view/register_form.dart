@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:formz/formz.dart';
 import 'package:retsept_cherno/ui/screens/home_Screen.dart';
-import '../../../../../ui/widgets/bottom_navigation_bar.dart';
+import '../../../../../ui/screens/tadbox_screen.dart';
 import '../register.dart';
 
 class RegisterForm extends StatefulWidget {

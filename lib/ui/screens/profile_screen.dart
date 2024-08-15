@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retsept_cherno/ui/widgets/bottom_navigation_bar.dart';
+import 'package:retsept_cherno/ui/screens/tadbox_screen.dart';
 import 'package:retsept_cherno/ui/widgets/followers_and_circle_avatar_following_widget.dart';
 import 'package:retsept_cherno/ui/widgets/silver_fill_reamining_widget.dart';
 import 'package:share_plus/share_plus.dart';
