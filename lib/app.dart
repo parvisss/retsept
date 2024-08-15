@@ -1,10 +1,6 @@
 import 'package:authentication_repository/authentication_repostory.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
-import 'package:retsept_cherno/bloc/user/user_bloc.dart';
-import 'package:retsept_cherno/services/firestore/retsept_firebase.dart';
-import 'package:retsept_cherno/services/firestore/user_firestore.dart';
 import 'package:retsept_cherno/tursunali/lib/bloc/authentication/bloc/authentication_bloc.dart';
 import 'package:retsept_cherno/tursunali/lib/services/auth_service.dart/authentication_service.dart';
 import 'package:retsept_cherno/tursunali/lib/services/user_service/user_service.dart';
@@ -64,12 +60,6 @@ class _AppState extends State<App> {
               userRepository: _userRepository,
             )..add(AuthenticationSubscriptionRequested()),
           ),
-          BlocProvider(
-            create: (context) => RetseptBloc(RetseptFirebase()),
-          ),
-          BlocProvider(
-            create: (context) => UserBloc(UserFirestore()),
-          ),
         ],
         child: const AppView(),
       ),
@@ -87,34 +77,40 @@ class AppView extends StatefulWidget {
 class _AppViewState extends State<AppView> {
   final _navigatorKey = GlobalKey<NavigatorState>();
 
+  NavigatorState get _navigator => _navigatorKey.currentState!;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: _navigatorKey,
-      home: BlocListener<AuthenticationBloc, AuthenticationState>(
-        listener: (context, state) {
-          switch (state.status) {
-            case AuthenticationStatus.authenticated:
-              _navigatorKey.currentState!.pushReplacement(
-                  MaterialPageRoute(builder: (ctx) => const HomeScreen()));
-              break;
-            case AuthenticationStatus.unauthenticated:
-              _navigatorKey.currentState!.pushReplacement(
-                  MaterialPageRoute(builder: (ctx) => const LoginPage()));
-              break;
-            case AuthenticationStatus.initial:
-              // Could show a splash screen or similar initial view
-              break;
-            case AuthenticationStatus.error:
-            case AuthenticationStatus.loading:
-              // Handle these cases if needed
-              break;
-          }
-        },
-        child:
-            const Splash1Screen(), // Replace with a splash screen or similar.
-      ),
+      builder: (context, child) {
+        return BlocListener<AuthenticationBloc, AuthenticationState>(
+          listener: (context, state) {
+            switch (state.status) {
+              case AuthenticationStatus.authenticated:
+                _navigator.pushReplacement(
+                  MaterialPageRoute(builder: (ctx) => const HomeScreen()),
+                );
+                break;
+              case AuthenticationStatus.unauthenticated:
+                _navigator.pushReplacement(
+                  MaterialPageRoute(builder: (ctx) => const LoginPage()),
+                );
+                break;
+              case AuthenticationStatus.initial:
+                break;
+              case AuthenticationStatus.error:
+              case AuthenticationStatus.loading:
+                break;
+            }
+          },
+          child: child,
+        );
+      },
+      onGenerateRoute: (settings) {
+        return MaterialPageRoute(builder: (ctx) => const Splash1Screen());
+      },
     );
   }
 }
