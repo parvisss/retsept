@@ -5,7 +5,6 @@ import 'package:formz/formz.dart';
 import 'package:retsept_cherno/tursunali/lib/ui/login/models/email.dart';
 import 'package:retsept_cherno/tursunali/lib/ui/login/models/password.dart';
 
-import '../login.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
