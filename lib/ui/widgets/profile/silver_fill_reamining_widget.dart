@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retsept_cherno/ui/widgets/recept_widget.dart';
+import 'package:retsept_cherno/ui/widgets/profile/recept_widget.dart';
 
 class SilverFillReaminingWidget extends StatefulWidget {
   const SilverFillReaminingWidget({super.key});

@@ -1,13 +1,13 @@
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/material.dart';
-import 'package:retsept_cherno/ui/screens/tab_box_screen.dart';
-import 'package:retsept_cherno/ui/widgets/build_chip_selector_widget.dart';
-import 'package:retsept_cherno/ui/widgets/difficulty_selector.dart';
-import 'package:retsept_cherno/ui/widgets/ingredients.dart';
-import 'package:retsept_cherno/ui/widgets/number_selector.dart';
-import 'package:retsept_cherno/ui/widgets/section_title.dart';
-import 'package:retsept_cherno/ui/widgets/text_field.dart';
-import 'package:retsept_cherno/ui/widgets/time_field.dart';
+import 'package:retsept_cherno/ui/widgets/add_new_recept/build_chip_selector_widget.dart';
+import 'package:retsept_cherno/ui/widgets/add_new_recept/difficulty_selector.dart';
+import 'package:retsept_cherno/ui/widgets/add_new_recept/ingredients.dart';
+import 'package:retsept_cherno/ui/widgets/add_new_recept/number_selector.dart';
+import 'package:retsept_cherno/ui/widgets/add_new_recept/section_title.dart';
+import 'package:retsept_cherno/ui/widgets/add_new_recept/text_field.dart';
+import 'package:retsept_cherno/ui/widgets/add_new_recept/time_field.dart';
+
 
 class AddNewScreen extends StatefulWidget {
   const AddNewScreen({super.key});
