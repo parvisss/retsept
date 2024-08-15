@@ -25,6 +25,15 @@ dependencies:
 
 
   easy_stepper: ^0.8.5+1
+  formz: ^0.7.0
+  animate_do: ^3.3.4
+  flutter_spinkit: ^5.2.1
+  user_repository:
+    path: packages/user_repostory
+  authentication_repository:
+    path: packages/authentication_repository
+  shared_preferences: ^2.3.1
+  flutter_screenutil: ^5.9.3
 
 
 dev_dependencies:
