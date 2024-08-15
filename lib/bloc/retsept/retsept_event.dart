@@ -28,8 +28,7 @@ class DeleteRetseptEvent extends RetseptEvent {
   List<Object> get props => [id];
 }
 
-
-//event to edit retsept 
+//event to edit retsept
 class EditRetseptEvent extends RetseptEvent {
   final String id;
   final RetseptModel retsept;
@@ -39,4 +38,4 @@ class EditRetseptEvent extends RetseptEvent {
 }
 
 // Event to stream retsepts
-class StreamRetseptsEvent extends RetseptEvent {}
+class LoadRetsepts extends RetseptEvent {}

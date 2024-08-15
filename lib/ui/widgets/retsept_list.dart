@@ -18,8 +18,8 @@ class RetseptList extends StatelessWidget {
             itemBuilder: (context, index) {
               final retsept = state.retsepts[index];
               return ListTile(
-                title: Text(retsept['name'] ?? 'Unknown'),
-                subtitle: Text(retsept['description'] ?? 'No description'),
+                title: Text(retsept.name),
+                subtitle: Text(retsept.difficulty),
               );
             },
           );
