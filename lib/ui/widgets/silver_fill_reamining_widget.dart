@@ -32,7 +32,6 @@ class _SilverFillReaminingWidgetState extends State<SilverFillReaminingWidget> {
             },
           ),
           const ReceptWidget(),
-          const LatestRecipeCard(),
         ],
       ),
     );

@@ -5,6 +5,7 @@ import 'package:retsept_cherno/bloc/user/user_bloc.dart';
 import 'package:retsept_cherno/services/firestore/retsept_firebase.dart';
 import 'package:retsept_cherno/services/firestore/user_firestore.dart';
 import 'package:retsept_cherno/ui/screens/home_Screen.dart';
+import 'package:retsept_cherno/ui/screens/splash_screen1.dart';
 
 void main() async {
   // WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +34,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
+        home: Splash1Screen(),
       ),
     );
   }

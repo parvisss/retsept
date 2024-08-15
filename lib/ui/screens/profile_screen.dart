@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:retsept_cherno/ui/widgets/bottom_navigation_bar.dart';
 import 'package:retsept_cherno/ui/widgets/followers_and_circle_avatar_following_widget.dart';
+import 'package:retsept_cherno/ui/widgets/pea_and_ricotta.dart';
+import 'package:retsept_cherno/ui/widgets/recipe_card.dart';
+import 'package:retsept_cherno/ui/widgets/recipe_screen.dart';
 import 'package:retsept_cherno/ui/widgets/silver_fill_reamining_widget.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -40,7 +43,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
@@ -71,7 +74,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     tabs: [
                       Tab(text: "Posts"),
                       Tab(text: 'Less Details'),
-                      Tab(text: 'More Details'),
                     ],
                   ),
                 ],
