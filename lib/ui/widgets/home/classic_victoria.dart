@@ -5,7 +5,6 @@ import 'package:retsept_cherno/ui/widgets/home/recipe_card.dart';
 class ClassicVictoria extends StatelessWidget {
   const ClassicVictoria({super.key, required this.retsept});
   final RetseptModel retsept;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:retsept_cherno/services/firestore/retsept_firebase.dart';
+import 'package:retsept_cherno/services/firestore/retsept/like_retsept.dart';
+import 'package:retsept_cherno/services/firestore/retsept/retsept_firebase.dart';
 import 'retsept_event.dart';
 import 'retsept_state.dart';
 
@@ -11,6 +12,7 @@ class RetseptBloc extends Bloc<RetseptEvent, RetseptState> {
     on<EditRetseptEvent>(_onEditRetsept);
     on<DeleteRetseptEvent>(_onDeleteRetsept);
     on<LoadRetsepts>(_onLoadRetsepts);
+    on<LikeRetseptEvent>(_onLikeRetsept);
   }
 
   void _onAddRetsept(AddRetseptEvent event, Emitter<RetseptState> emit) async {
@@ -26,7 +28,9 @@ class RetseptBloc extends Bloc<RetseptEvent, RetseptState> {
       EditRetseptEvent event, Emitter<RetseptState> emit) async {
     try {
       await retseptService.editRetsept(event.id, event.retsept);
-    } catch (e) {}
+    } catch (e) {
+      emit(RetseptError(e.toString()));
+    }
   }
 
   void _onDeleteRetsept(
@@ -40,12 +44,22 @@ class RetseptBloc extends Bloc<RetseptEvent, RetseptState> {
   }
 
   _onLoadRetsepts(LoadRetsepts event, Emitter<RetseptState> emit) async {
+    emit(RetseptLoading());
     try {
       final retsept = await retseptService.getRetsepts();
-      print(retsept.first);
       emit(RetseptLoaded(retsept));
     } catch (e) {
-      print("error : $e");
+      emit(RetseptError(e.toString()));
+    }
+  }
+
+  void _onLikeRetsept(
+      LikeRetseptEvent event, Emitter<RetseptState> emit) async {
+    try {
+      await LikeRetsept().likeRetsept(event.retseptId, event.isLike);
+      add(LoadRetsepts());
+    } catch (e) {
+      emit(RetseptError(e.toString()));
     }
   }
 }

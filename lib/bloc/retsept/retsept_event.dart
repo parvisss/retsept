@@ -39,3 +39,9 @@ class EditRetseptEvent extends RetseptEvent {
 
 // Event to stream retsepts
 class LoadRetsepts extends RetseptEvent {}
+
+class LikeRetseptEvent extends RetseptEvent {
+  final String retseptId;
+  final bool isLike;
+  const LikeRetseptEvent({required this.retseptId, required this.isLike});
+}
