@@ -156,7 +156,7 @@ class RecipeCard extends StatelessWidget {
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey,
                   tabs: [
-                    Tab(text: 'Introduction'),
+                    Tab(text: 'Preparation'),
                     Tab(text: 'Ingredients'),
                     Tab(text: 'Comments'),
                   ],
@@ -165,10 +165,21 @@ class RecipeCard extends StatelessWidget {
                   height: 400.0,
                   child: TabBarView(
                     children: [
-                      const Center(child: Text('Introduction content here')),
                       Expanded(
                         child: ListView.builder(
-                          itemCount: retsept.coments.length,
+                          itemCount: retsept.preparation.length,
+                          itemBuilder: (ctx, index) {
+                            // print(retsept.coments);
+                            return _buildPreperation(
+                              retsept.preparation[index],
+                            );
+                          },
+                          padding: const EdgeInsets.all(8.0),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: retsept.ingredients.length,
                           itemBuilder: (ctx, index) {
                             // print(retsept.coments);
                             return _buildIngredients(
@@ -244,6 +255,29 @@ class RecipeCard extends StatelessWidget {
   }
 
   Widget _buildIngredients(String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(width: 8.0),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(12.0),
+              decoration: BoxDecoration(
+                color: Colors.blue[50],
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: Colors.blueAccent),
+              ),
+              child: Text(text),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPreperation(String text) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Row(
