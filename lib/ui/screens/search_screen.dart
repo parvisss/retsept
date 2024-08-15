@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:retsept_cherno/ui/widgets/bottom_navigation_bar.dart';
+import 'package:retsept_cherno/ui/screens/tadbox_screen.dart';
 import 'package:retsept_cherno/ui/widgets/build_chef_list_widget.dart';
 import 'package:retsept_cherno/ui/widgets/build_griw_view_widget.dart';
 import 'package:retsept_cherno/ui/widgets/build_tag_list_widget.dart';
