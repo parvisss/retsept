@@ -23,7 +23,7 @@ class _SliverToBoxAdapterWidgetState extends State<SliverToBoxAdapterWidget> {
   }
 
   void _shareProfile() {
-    final String apkUrl =
+    const String apkUrl =
         'https://your-file-sharing-service.com/app-release.apk';
     Share.share('Download the app here: $apkUrl');
   }
