@@ -6,11 +6,11 @@ import 'package:retsept_cherno/bloc/user/user_bloc.dart';
 import 'package:retsept_cherno/bloc/user/user_event.dart';
 import 'package:retsept_cherno/bloc/user/user_state.dart';
 import 'package:retsept_cherno/data/models/user_model.dart';
-import 'package:retsept_cherno/ui/widgets/home/custom_scroll_view_widget.dart';
 import 'package:retsept_cherno/ui/widgets/profile/followers_and_circle_avatar_following_widget.dart';
 import 'package:retsept_cherno/ui/widgets/search/build_recipe_card_widget.dart';
 import 'package:share_plus/share_plus.dart';
 
+// ignore: must_be_immutable
 class ProfileScreen extends StatefulWidget {
   ProfileScreen(this.user, {super.key});
   UserModel? user;
@@ -60,22 +60,17 @@ class ProfileScreenState extends State<ProfileScreen> {
         body: BlocBuilder<UserBloc, UserState>(
           builder: (context, state) {
             if (state is UserLoading) {
-              return const SliverFillRemaining(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
+              return const Center(
+                child: CircularProgressIndicator(),
               );
             } else if (state is UserError) {
-              return SliverFillRemaining(
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(state.message),
-                  ),
+              return Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(state.message),
                 ),
               );
             } else if (state is UserLoaded) {
-              // Ensure that posts and favorites are List<String>
               List<String> posts = state.userData['posts']
                   .map<String>((item) => item.toString())
                   .toList();
@@ -89,13 +84,17 @@ class ProfileScreenState extends State<ProfileScreen> {
                   BlocBuilder<RetseptBloc, RetseptState>(
                     builder: (context, state) {
                       if (state is RetseptLoading) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return const SliverFillRemaining(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
                         );
                       }
                       if (state is RetseptError) {
-                        return Center(
-                          child: Text(state.message),
+                        return SliverFillRemaining(
+                          child: Center(
+                            child: Text(state.message),
+                          ),
                         );
                       }
                       if (state is RetseptLoaded) {
@@ -135,8 +134,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                           ),
                         );
                       }
-                      return const Center(
-                        child: Text("Empty Data"),
+                      return const SliverFillRemaining(
+                        child: Center(child: Text("Empty Data")),
                       );
                     },
                   ),
@@ -145,9 +144,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         Column(
                           children: [
-                            const SizedBox(
-                              height: 120,
-                            ),
+                            const SizedBox(height: 120),
                             Flexible(
                               child: GridView.builder(
                                 padding: const EdgeInsets.all(16.0),
@@ -169,9 +166,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                         ),
                         Column(
                           children: [
-                            const SizedBox(
-                              height: 120,
-                            ),
+                            const SizedBox(height: 120),
                             Flexible(
                               child: GridView.builder(
                                 padding: const EdgeInsets.all(16.0),
@@ -197,8 +192,8 @@ class ProfileScreenState extends State<ProfileScreen> {
                 ],
               );
             }
-            return const SliverFillRemaining(
-              child: Center(child: Text("Unexpected state")),
+            return const Center(
+              child: Text("Unexpected state"),
             );
           },
         ),

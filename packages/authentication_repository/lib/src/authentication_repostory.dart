@@ -1,16 +1,12 @@
 import 'dart:async';
-
-import 'package:authentication_repository/src/local_db/local_db.dart';
-
-import 'models/models.dart';
-import 'services/authentication_service.dart';
+import 'package:authentication_repository/authentication_repostory.dart';
 
 enum AuthenticationStatus {
   initial,
   authenticated,
   unauthenticated,
   error,
-  loading;
+  loading,
 }
 
 class AuthenticationRepository {
@@ -22,10 +18,44 @@ class AuthenticationRepository {
     required AuthenticationService authenticationService,
   }) : _authenticationService = authenticationService;
 
+  Future<void> logIn({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final auth = await _authenticationService.login(email, password);
+      _authController.add(auth);
+      _controller.add(AuthenticationStatus.authenticated);
+      await LocalDb.saveToken(auth.idToken);
+    } catch (e) {
+      _controller.add(AuthenticationStatus.error);
+    }
+  }
+
+  Future<Auth> register({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final auth = await _authenticationService.register(email, password);
+      _authController.add(auth);
+      _controller.add(AuthenticationStatus.authenticated);
+      await LocalDb.saveToken(auth.idToken);
+      return auth;
+    } catch (e) {
+      _controller.add(AuthenticationStatus.error);
+      rethrow;
+    }
+  }
+
   Stream<AuthenticationStatus> get status async* {
     await Future<void>.delayed(const Duration(seconds: 1));
-    // api 'dan ma'lumot kelishi kerak
-    yield AuthenticationStatus.unauthenticated;
+    final token = await LocalDb.getIdToken();
+    if (token != null && token.isNotEmpty) {
+      yield AuthenticationStatus.authenticated;
+    } else {
+      yield AuthenticationStatus.unauthenticated;
+    }
     yield* _controller.stream;
   }
 
@@ -33,34 +63,12 @@ class AuthenticationRepository {
     yield* _authController.stream;
   }
 
-  Future<void> logIn({
-    required String email,
-    required String password,
-  }) async {
-    final auth = await _authenticationService.login(email, password);
-    _authController.add(auth);
-    _controller.add(AuthenticationStatus.authenticated);
-    LocalDb.saveToken(auth.idToken);
-  }
-
-  Future<Auth> register({
-    required String email,
-    required String password,
-  }) async {
-    final auth = await _authenticationService.register(email, password);
-    _authController.add(auth);
-    _controller.add(AuthenticationStatus.authenticated);
-    
-    LocalDb.saveToken(auth.idToken);
-    return auth;
-  }
-
   void logOut() {
     _controller.add(AuthenticationStatus.unauthenticated);
     LocalDb.deleteToken();
   }
 
-   Future<Auth?> getAuthUser() async {
+  Future<Auth?> getAuthUser() async {
     final response = await _authenticationService.getUserInfo();
     if (response != null) {
       return Auth.fromList(response["users"], await LocalDb.getIdToken());
@@ -68,5 +76,8 @@ class AuthenticationRepository {
     return null;
   }
 
-  void dispose() => _controller.close();
+  void dispose() {
+    _controller.close();
+    _authController.close();
+  }
 }
