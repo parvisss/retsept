@@ -9,87 +9,15 @@ class ClassicVictoria extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16.0),
-              ),
-              content: SingleChildScrollView(
-                child: SizedBox(
-                  width: double.maxFinite,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return RecipeCard(
-                                      retsept: retsept,
-                                    );
-                                  },
-                                ),
-                              );
-                            },
-                            child: const Text('View More'),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16.0),
-                      Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.0),
-                        ),
-                        child: Center(
-                          child: Text(
-                            retsept.description,
-                            style: const TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 16.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _buildInfoChip(Icons.local_fire_department,
-                              retsept.dietaryTarget),
-                          _buildInfoChip(Icons.fastfood, retsept.difficulty),
-                        ],
-                      ),
-                      _buildInfoChip(Icons.timer, retsept.preparationTime),
-                      const SizedBox(height: 16.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          _buildInfoChip(
-                              Icons.favorite, retsept.likes.toString()),
-                          _buildInfoChip(
-                              Icons.comment, retsept.coments.length.toString()),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return RecipeCard(
+                retsept: retsept,
+              );
+            },
+          ),
         );
       },
       child: Card(

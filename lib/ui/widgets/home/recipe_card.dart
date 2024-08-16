@@ -4,7 +4,8 @@ import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_event.dart';
 import 'package:retsept_cherno/data/models/coment_model.dart';
 import 'package:retsept_cherno/data/models/retsept_model.dart';
-import 'package:retsept_cherno/ui/widgets/home/controller/connection_with_service.dart';
+import 'package:retsept_cherno/ui/widgets/home/controller/coment_controller.dart';
+import 'package:retsept_cherno/ui/widgets/home/controller/like_controller.dart';
 
 class RecipeCard extends StatefulWidget {
   const RecipeCard({super.key, required this.retsept});
@@ -16,13 +17,17 @@ class RecipeCard extends StatefulWidget {
 
 class _RecipeCardState extends State<RecipeCard> {
   int likesLocal = 0;
+  int comentLocal = 0;
   bool liked = false;
   @override
   void initState() {
     context.read<RetseptBloc>().add(LoadRetsepts());
     likesLocal = widget.retsept.likes;
+    comentLocal = widget.retsept.coments.length;
     super.initState();
   }
+
+  final comentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +90,7 @@ class _RecipeCardState extends State<RecipeCard> {
                       ),
                       onPressed: () async {
                         final updatedLikes =
-                            await ConnectionWithService().handleLikeButton(
+                            await LikeController().handleLikeButton(
                           retseptId: widget.retsept.id,
                           likesLocal: likesLocal,
                           isLike: liked,
@@ -179,8 +184,7 @@ class _RecipeCardState extends State<RecipeCard> {
             children: [
               _buildInfoChip(Icons.favorite, likesLocal.toString()),
               const SizedBox(width: 10),
-              _buildInfoChip(
-                  Icons.comment, widget.retsept.coments.length.toString()),
+              _buildInfoChip(Icons.comment, comentLocal.toString()),
             ],
           ),
           const SizedBox(height: 16.0),
@@ -226,16 +230,45 @@ class _RecipeCardState extends State<RecipeCard> {
                         ),
                       ),
                       Expanded(
-                        child: ListView.builder(
-                          itemCount: widget.retsept.coments.length,
-                          itemBuilder: (ctx, index) {
-                            // print(retsept.coments);
-                            return _buildComment(
-                              ComentModel.fromJson(
-                                  widget.retsept.coments[index]),
-                            );
-                          },
-                          padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: widget.retsept.coments.length,
+                                itemBuilder: (ctx, index) {
+                                  // print(retsept.coments);
+                                  return _buildComment(
+                                    ComentModel.fromJson(
+                                        widget.retsept.coments[index]),
+                                  );
+                                },
+                                padding: const EdgeInsets.all(8.0),
+                              ),
+                            ),
+                            TextField(
+                              controller: comentController,
+                              decoration: InputDecoration(
+                                border: const OutlineInputBorder(),
+                                filled: true,
+                                fillColor:
+                                    const Color.fromARGB(255, 217, 229, 240),
+                                suffixIcon: IconButton(
+                                  onPressed: () async {
+                                    int updatedLocalComment =
+                                        await ComentControllr().sendConment(
+                                            retseptId: widget.retsept.id,
+                                            coment: comentController.text);
+                                    comentController.text = '';
+                                    comentLocal++;
+                                    setState(() {
+                                      comentLocal = updatedLocalComment;
+                                    });
+                                  },
+                                  icon: const Icon(Icons.send),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
                       ),
                     ],
@@ -263,7 +296,24 @@ class _RecipeCardState extends State<RecipeCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(comet.sender),
+          Row(
+            children: [
+              const SizedBox(
+                width: 10,
+              ),
+              const Icon(
+                Icons.person,
+                size: 25,
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Text(
+                comet.sender,
+                style: const TextStyle(fontSize: 18),
+              ),
+            ],
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -285,6 +335,13 @@ class _RecipeCardState extends State<RecipeCard> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(comet.date),
+              const SizedBox(
+                width: 5,
+              ),
+              const Icon(
+                Icons.calendar_month,
+                size: 20,
+              ),
             ],
           )
         ],
@@ -300,14 +357,11 @@ class _RecipeCardState extends State<RecipeCard> {
         children: [
           const SizedBox(width: 8.0),
           Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(12.0),
-              decoration: BoxDecoration(
-                color: Colors.blue[50],
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(color: Colors.blueAccent),
+            child: Expanded(
+              child: ListTile(
+                leading: const Icon(Icons.circle),
+                title: Text(text),
               ),
-              child: Text(text),
             ),
           ),
         ],
@@ -323,14 +377,9 @@ class _RecipeCardState extends State<RecipeCard> {
         children: [
           const SizedBox(width: 8.0),
           Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(12.0),
-              decoration: BoxDecoration(
-                color: Colors.blue[50],
-                borderRadius: BorderRadius.circular(8.0),
-                border: Border.all(color: Colors.blueAccent),
-              ),
-              child: Text(text),
+            child: ListTile(
+              leading: const Icon(Icons.circle),
+              title: Text(text),
             ),
           ),
         ],

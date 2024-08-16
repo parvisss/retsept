@@ -40,8 +40,16 @@ class EditRetseptEvent extends RetseptEvent {
 // Event to stream retsepts
 class LoadRetsepts extends RetseptEvent {}
 
+// event to controll likes
 class LikeRetseptEvent extends RetseptEvent {
   final String retseptId;
   final bool isLike;
   const LikeRetseptEvent({required this.retseptId, required this.isLike});
+}
+
+// event to send coment
+class ComentRetseptEvent extends RetseptEvent {
+  final String retseptId;
+  final String coment;
+  const ComentRetseptEvent({required this.retseptId, required this.coment});
 }
