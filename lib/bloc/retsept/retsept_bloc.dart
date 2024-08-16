@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:retsept_cherno/services/firestore/retsept/like_retsept.dart';
 import 'package:retsept_cherno/services/firestore/retsept/retsept_firebase.dart';
+import 'package:retsept_cherno/services/firestore/retsept/send_coment_service.dart';
 import 'retsept_event.dart';
 import 'retsept_state.dart';
 
@@ -13,6 +14,7 @@ class RetseptBloc extends Bloc<RetseptEvent, RetseptState> {
     on<DeleteRetseptEvent>(_onDeleteRetsept);
     on<LoadRetsepts>(_onLoadRetsepts);
     on<LikeRetseptEvent>(_onLikeRetsept);
+    on<ComentRetseptEvent>(_onSendComent);
   }
 
   void _onAddRetsept(AddRetseptEvent event, Emitter<RetseptState> emit) async {
@@ -58,6 +60,18 @@ class RetseptBloc extends Bloc<RetseptEvent, RetseptState> {
     try {
       await LikeRetsept().likeRetsept(event.retseptId, event.isLike);
       add(LoadRetsepts());
+    } catch (e) {
+      emit(RetseptError(e.toString()));
+    }
+  }
+
+  void _onSendComent(
+      ComentRetseptEvent event, Emitter<RetseptState> emit) async {
+    try {
+      await SendComentService()
+          .sendComent(retseptId: event.retseptId, coment: event.coment);
+      final retsept = await retseptService.getRetsepts();
+      emit(RetseptLoaded(retsept));
     } catch (e) {
       emit(RetseptError(e.toString()));
     }

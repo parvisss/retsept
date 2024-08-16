@@ -1,6 +1,6 @@
 import 'package:retsept_cherno/services/firestore/retsept/like_retsept.dart';
 
-class ConnectionWithService {
+class LikeController {
   Future<int> handleLikeButton({
     required bool isLike,
     required String retseptId,
