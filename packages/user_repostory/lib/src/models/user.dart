@@ -1,15 +1,18 @@
-class UserModel {
-  String id;
-  String name;
-  String email;
-  String? password;
-  List<dynamic>? saved;
-  List<dynamic>? favorites;
-  String? image;
-  String? favoriteMeal;
-  double? rate;
 
-  UserModel({
+import 'package:equatable/equatable.dart';
+
+class UserModel extends Equatable {
+  final String id;
+  final String name;
+  final String email;
+  final String? password;
+  final List<dynamic>? saved;
+  final List<dynamic>? favorites;
+  final String? image;
+  final String? favoriteMeal;
+  final double? rate;
+
+  const UserModel({
     required this.id,
     required this.name,
     required this.email,
@@ -21,8 +24,24 @@ class UserModel {
     this.rate,
   });
 
-  List<Object?> get props =>
-      [id, email, name, password, saved, favorites, image, favoriteMeal, rate];
+  static const empty = UserModel(
+    id: '',
+    name: '',
+    email: '',
+  );
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        email,
+        password,
+        saved,
+        favorites,
+        image,
+        favoriteMeal,
+        rate,
+      ];
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(

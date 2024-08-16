@@ -96,8 +96,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         });
         emit(state.copyWith(status: FormzSubmissionStatus.success));
       } catch (e) {
-        print("parviz");
-        print("------------");
         emit(state.copyWith(status: FormzSubmissionStatus.failure));
       }
     
