@@ -8,7 +8,6 @@ import 'package:retsept_cherno/ui/widgets/add_new_recept/section_title.dart';
 import 'package:retsept_cherno/ui/widgets/add_new_recept/text_field.dart';
 import 'package:retsept_cherno/ui/widgets/add_new_recept/time_field.dart';
 
-
 class AddNewScreen extends StatefulWidget {
   const AddNewScreen({super.key});
 
@@ -41,6 +40,7 @@ class _AddNewScreenState extends State<AddNewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           "New Recipe",
           style: TextStyle(color: Colors.white),
@@ -94,11 +94,11 @@ class _AddNewScreenState extends State<AddNewScreen> {
                 ],
               ),
               const SizedBox(height: 16),
-              SectionTitle(title: "Name"),
+              const SectionTitle(title: "Name"),
               const SizedBox(height: 5),
-              CustomTextField(hint: "Name your recipe"),
+              const CustomTextField(hint: "Name your recipe"),
               const SizedBox(height: 10),
-              SectionTitle(title: "Number"),
+              const SectionTitle(title: "Number"),
               const SizedBox(height: 10),
               Row(
                 children: [
@@ -115,17 +115,17 @@ class _AddNewScreenState extends State<AddNewScreen> {
                 ],
               ),
               const SizedBox(height: 10),
-              SectionTitle(title: "Cook Time"),
+              const SectionTitle(title: "Cook Time"),
               const SizedBox(height: 10),
-              Row(
+              const Row(
                 children: [
                   TimeField(label: "h"),
-                  const SizedBox(width: 10),
+                  SizedBox(width: 10),
                   TimeField(label: "m"),
                 ],
               ),
               const SizedBox(height: 10),
-              SectionTitle(title: "Difficulty"),
+              const SectionTitle(title: "Difficulty"),
               const SizedBox(height: 10),
               DifficultySelector(
                 selectedDifficulty: _selectedDifficulty,
@@ -136,9 +136,10 @@ class _AddNewScreenState extends State<AddNewScreen> {
                 },
               ),
               const SizedBox(height: 10),
-              SectionTitle(title: "Dish Type"),
+              const SectionTitle(title: "Dish Type"),
               const SizedBox(height: 8),
               BuildChipSelectorWidget(
+                // ignore: prefer_const_literals_to_create_immutables
                 options: [
                   'Breakfast',
                   'Lunch',
@@ -157,8 +158,8 @@ class _AddNewScreenState extends State<AddNewScreen> {
                 },
               ),
               const SizedBox(height: 20),
-              SectionTitle(title: "Hashtags"),
-              CustomTextField(hint: "#egg #Vegan #Sugarfree #lowfat"),
+              const SectionTitle(title: "Hashtags"),
+              const CustomTextField(hint: "#egg #Vegan #Sugarfree #lowfat"),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _nextStep,
@@ -178,8 +179,6 @@ class _AddNewScreenState extends State<AddNewScreen> {
           ),
         ),
       ),
-     
-
     );
   }
 }

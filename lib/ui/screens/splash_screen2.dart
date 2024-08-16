@@ -22,7 +22,7 @@ class _Splash2ScreenState extends State<Splash2Screen> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return SplashScreen3();
+            return const SplashScreen3();
           },
         ),
       );    });

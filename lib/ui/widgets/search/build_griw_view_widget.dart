@@ -4,27 +4,13 @@ import 'package:retsept_cherno/ui/widgets/search/build_recipe_card_widget.dart';
 
 class BuildGridViewWidget extends StatelessWidget {
   final String searchQuery;
-  final RetseptModel retsept;
+  final List retsepts;
 
   BuildGridViewWidget(
-      {super.key, required this.searchQuery, required this.retsept});
-
-  final List<String> imagePaths = [
-    'assets/food8.png',
-    'assets/food2.png',
-    'assets/food3.png',
-    'assets/food4.png',
-    'assets/food5.png',
-    'assets/food6.png',
-  ];
+      {super.key, required this.searchQuery, required this.retsepts});
 
   @override
   Widget build(BuildContext context) {
-    final filteredImages = imagePaths.where((imagePath) {
-      final imageName = imagePath.split('/').last.toLowerCase();
-      return imageName.contains(searchQuery.toLowerCase());
-    }).toList();
-
     return GridView.builder(
       padding: const EdgeInsets.all(16.0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -32,11 +18,12 @@ class BuildGridViewWidget extends StatelessWidget {
         crossAxisSpacing: 16.0,
         mainAxisSpacing: 16.0,
       ),
-      itemCount: filteredImages.length,
+      itemCount: retsepts.length,
       itemBuilder: (context, index) {
+        RetseptModel retsept = RetseptModel.fromJson(retsepts[index]);
         return BuildRecipeCardWidget(
           retseptId: retsept.id,
-        ); // Fixed imagePath parameter
+        );
       },
     );
   }
