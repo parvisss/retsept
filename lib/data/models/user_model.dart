@@ -6,7 +6,8 @@ class UserModel {
   List<dynamic> saved;
   List<dynamic> favorites;
   String image;
-  String favoriteMeal;
+  List<dynamic> favoriteMeal;
+  List<dynamic> posts;
   double rate;
 
   UserModel({
@@ -19,6 +20,7 @@ class UserModel {
     required this.favorites,
     required this.image,
     required this.favoriteMeal,
+    required this.posts,
   });
 
   // Factory method to create an instance from a JSON map
@@ -32,7 +34,8 @@ class UserModel {
       saved: json['saved'] as List<dynamic>,
       favorites: json['favorites'] as List<dynamic>,
       image: json['image'] as String,
-      favoriteMeal: json['favoriteMeal'] as String,
+      favoriteMeal: json['favoriteMeal'] as List<dynamic>,
+      posts: json['posts'] as List<dynamic>,
     );
   }
 
@@ -48,6 +51,7 @@ class UserModel {
       'favorites': favorites,
       'image': image,
       'favoriteMeal': favoriteMeal,
+      'posts': posts,
     };
   }
 }

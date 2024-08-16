@@ -8,7 +8,6 @@ class UserFirestore {
 
   //? Add a new user to the database
   Future<void> addUser(UserModel user) async {
-    
     try {
       final Map<String, dynamic> userJson = user.toJson();
       final response = await _dio.post("$_baseUrl/users.json", data: userJson);
@@ -40,7 +39,7 @@ class UserFirestore {
 
   //? Get user data
   Future<Map<String, dynamic>> getUserData() async {
-    final userId = '';
+    final userId = 'iser1';
 
     try {
       final response = await _dio.get("$_baseUrl/users/$userId.json");
