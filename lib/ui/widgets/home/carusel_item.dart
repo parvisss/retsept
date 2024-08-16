@@ -13,14 +13,16 @@ class CaruselItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      // Use the height parameter here
       margin: const EdgeInsets.all(5.0),
       width: 350.0,
       height: 350.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         image: DecorationImage(
-          image: AssetImage(imagePath),
+          image: NetworkImage(imagePath),
           fit: BoxFit.cover,
+          onError: (error, stackTrace) {},
         ),
       ),
       child: Align(
@@ -28,7 +30,11 @@ class CaruselItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.6),
+            gradient: LinearGradient(
+              colors: [Colors.transparent, Colors.black.withOpacity(0.6)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
             borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(8.0),
               bottomRight: Radius.circular(8.0),

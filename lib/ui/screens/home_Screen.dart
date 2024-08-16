@@ -20,6 +20,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final PageController _pageController = PageController();
   int _currentPage = 0;
+  Timer? _timer;
+
 
   @override
   void initState() {
@@ -27,30 +29,47 @@ class _HomeScreenState extends State<HomeScreen> {
     context.read<RetseptBloc>().add(LoadRetsepts());
     context.read<UserBloc>().add(LoadUserDataEvent());
 
-    Timer.periodic(const Duration(seconds: 3), (Timer timer) {
-      if (_currentPage < 2) {
-        _currentPage++;
-      } else {
-        _currentPage = 0;
+    _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
+      if (mounted) {
+        setState(() {
+          // Change the logic to loop correctly based on the number of items
+          if (_currentPage < _pageController.positions.length - 1) {
+            _currentPage++;
+          } else {
+            _currentPage = 0;
+          }
+        });
+
+        _pageController.animateToPage(
+          _currentPage,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOut,
+        );
       }
 
-      _pageController.animateToPage(
-        _currentPage,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeInOut,
-      );
     });
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    _timer?.cancel();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Home",
+          style: TextStyle(fontSize: 28),
+        ),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.blue,
+      ),
       body: BlocProvider(
         create: (context) =>
             RetseptBloc(RetseptFirebase())..add(LoadRetsepts()),
@@ -82,58 +101,44 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: Text(state.message),
                     ),
                   );
-                }
-                if (state is RetseptLoaded) {
-                  return ListView(
+                } else if (state is RetseptLoaded) {
+                  return Column(
+
                     children: [
                       // CaruselItemlarni ko'rsatish
                       SizedBox(
                         height: 350.0,
-                        child: PageView(
+                        child: PageView.builder(
                           controller: _pageController,
-                          children: const [
-                            CaruselItem(
-                              imagePath: 'assets/food2.png',
-                              title: 'Strawberry',
-                            ),
-                            CaruselItem(
-                              imagePath: 'assets/food3.png',
-                              title: 'Berry',
-                            ),
-                            CaruselItem(
-                              imagePath: 'assets/food10.png',
-                              title: 'Egg',
-                            ),
-                            CaruselItem(
-                              imagePath: 'assets/food5.png',
-                              title: 'Meat',
-                            ),
-                            CaruselItem(
-                              imagePath: 'assets/food6.png',
-                              title: 'Strawberry cake',
-                            ),
-                          ],
+                          itemCount: state
+                              .retsepts.length, // Use the length of retsepts
+                          itemBuilder: (context, index) {
+                            final retsept = state.retsepts[index];
+                            return CaruselItem(
+                              imagePath: retsept
+                                  .image, // Assuming retsept has imagePath field
+                              title: retsept
+                                  .name, // Assuming retsept has title field
+                            );
+                          },
                         ),
                       ),
-                      const SizedBox(
-                        height: 16.0,
-                      ),
+                      const SizedBox(height: 16.0),
                       // Retseptlar ro'yxati
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: state.props.length,
-                        itemBuilder: (ctx, index) {
-                          final retsetsept = state.props[index];
-                          return ClassicVictoria(retsept: retsetsept);
-                        },
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: state.retsepts.length,
+                          itemBuilder: (ctx, index) {
+                            final retsept = state.retsepts[index];
+                            return ClassicVictoria(retsept: retsept);
+                          },
+                        ),
                       ),
                     ],
                   );
                 }
-                return const Center(
-                  child: Text("Empty data"),
-                );
+                return const Center(child: Text("Empty data"));
+
               },
             ),
           ),
