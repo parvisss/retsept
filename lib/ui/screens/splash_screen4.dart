@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:retsept_cherno/ui/screens/home_Screen.dart';
+import 'package:retsept_cherno/ui/screens/tab_box_screen.dart';
 
 class Splash4Screen extends StatefulWidget {
   const Splash4Screen({super.key});
@@ -23,7 +23,7 @@ class _Splash4ScreenState extends State<Splash4Screen> {
         context,
         MaterialPageRoute(
           builder: (context) {
-            return const HomeScreen();
+            return const TabBoxScreen();
           },
         ),
       );

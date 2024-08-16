@@ -8,7 +8,7 @@ import 'package:retsept_cherno/services/firestore/user/user_firestore.dart';
 import 'package:retsept_cherno/tursunali/lib/bloc/authentication/bloc/authentication_bloc.dart';
 import 'package:retsept_cherno/tursunali/lib/services/auth_service.dart/authentication_service.dart';
 import 'package:retsept_cherno/tursunali/lib/services/user_service/user_service.dart';
-import 'package:retsept_cherno/ui/screens/home_Screen.dart';
+import 'package:retsept_cherno/tursunali/lib/ui/login/views/login_page.dart';
 import 'package:retsept_cherno/ui/screens/profile_screen.dart';
 import 'package:retsept_cherno/ui/screens/splash_screen1.dart';
 import 'package:user_repository/user_repostory.dart';
@@ -106,7 +106,7 @@ class _AppViewState extends State<AppView> {
                 break;
               case AuthenticationStatus.unauthenticated:
                 _navigator.pushReplacement(
-                  MaterialPageRoute(builder: (ctx) => const TabBoxScreen()),
+                  MaterialPageRoute(builder: (ctx) => const LoginPage()),
                 );
                 break;
               case AuthenticationStatus.initial:
