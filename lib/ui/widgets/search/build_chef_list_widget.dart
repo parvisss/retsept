@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BuildChefListWidget extends StatelessWidget {
   final String searchQuery;
 
-  BuildChefListWidget({super.key, required this.searchQuery});
+  BuildChefListWidget({super.key, required this.searchQuery, required String filterSelection});
 
   final List<Map<String, String>> chefs = [
     {'name': 'Mark Salvador', 'image': 'assets/chef3.png'},

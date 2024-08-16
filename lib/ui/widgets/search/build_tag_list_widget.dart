@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BuildTagListWidget extends StatelessWidget {
   final String searchQuery;
 
-  BuildTagListWidget({super.key, required this.searchQuery});
+  BuildTagListWidget({super.key, required this.searchQuery, required String filterSelection});
 
   final List<String> tags = [
     '#egg',
