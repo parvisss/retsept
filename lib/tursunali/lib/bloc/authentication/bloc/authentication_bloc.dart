@@ -23,15 +23,12 @@ class AuthenticationBloc
   AuthenticationSubscriptionRequested event,
   Emitter<AuthenticationState> emit,
 ) async {
-  print(state.status);
-  print("________________________ppp");
   await emit.onEach(
     _authenticationRepository.status,
     onData: (status) async {
       switch (status) {
         case AuthenticationStatus.authenticated:
           final user = await _tryGetUser();
-          print(user);
           emit(
             user != null
                 ? AuthenticationState.authenticated(user)
@@ -65,16 +62,13 @@ class AuthenticationBloc
 
   Future<Auth?> _tryGetUser() async {
   try {
-    final auth = await _authenticationRepository.auth.first;
-
+     await _authenticationRepository.auth.first;
     final user = await _authenticationRepository.getAuthUser();
     if (user == null) {
-      print('User not found for localId: ${auth.localId}');
     }
 
     return user;
   } catch (e) {
-    print('Error occurred: $e');
     return null;
   }
 }

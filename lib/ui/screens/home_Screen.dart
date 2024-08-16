@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:retsept_cherno/bloc/retsept/retsept_event.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_state.dart';
 import 'package:retsept_cherno/bloc/user/user_bloc.dart';
 import 'package:retsept_cherno/bloc/user/user_event.dart';
+import 'package:retsept_cherno/data/models/retsept_model.dart';
 import 'package:retsept_cherno/services/firestore/retsept/retsept_firebase.dart';
 import 'package:retsept_cherno/ui/widgets/home/carusel_item.dart';
 import 'package:retsept_cherno/ui/widgets/home/classic_victoria.dart';
@@ -22,7 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentPage = 0;
   Timer? _timer;
 
-
   @override
   void initState() {
     super.initState();
@@ -31,13 +32,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
     _timer = Timer.periodic(const Duration(seconds: 3), (Timer timer) {
       if (mounted) {
+        final state = context.read<RetseptBloc>().state;
+        final int totalPages = state is RetseptLoaded ? state.retsepts.length : 0;
+
         setState(() {
-          // Change the logic to loop correctly based on the number of items
-          if (_currentPage < _pageController.positions.length - 1) {
-            _currentPage++;
-          } else {
-            _currentPage = 0;
-          }
+          _currentPage = (_currentPage + 1) % totalPages;
         });
 
         _pageController.animateToPage(
@@ -46,7 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
           curve: Curves.easeInOut,
         );
       }
-
     });
   }
 
@@ -54,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _pageController.dispose();
     _timer?.cancel();
-
     super.dispose();
   }
 
@@ -71,77 +68,67 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.blue,
       ),
       body: BlocProvider(
-        create: (context) =>
-            RetseptBloc(RetseptFirebase())..add(LoadRetsepts()),
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.blue,
-                Colors.white,
-              ],
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: BlocBuilder<RetseptBloc, RetseptState>(
+        create: (context) => RetseptBloc(RetseptFirebase())..add(LoadRetsepts()),
+        child: CustomScrollView(
+          slivers: [
+            BlocBuilder<RetseptBloc, RetseptState>(
               builder: (context, state) {
                 if (state is RetseptLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return const SliverFillRemaining(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   );
                 } else if (state is RetseptError) {
-                  return Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(state.message),
+                  return SliverFillRemaining(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(state.message),
+                      ),
                     ),
                   );
                 } else if (state is RetseptLoaded) {
-                  return Column(
+                  final List<RetseptModel> retsepts = state.retsepts;
 
-                    children: [
-                      // CaruselItemlarni ko'rsatish
-                      SizedBox(
-                        height: 350.0,
-                        child: PageView.builder(
-                          controller: _pageController,
-                          itemCount: state
-                              .retsepts.length, // Use the length of retsepts
-                          itemBuilder: (context, index) {
-                            final retsept = state.retsepts[index];
-                            return CaruselItem(
-                              imagePath: retsept
-                                  .image, // Assuming retsept has imagePath field
-                              title: retsept
-                                  .name, // Assuming retsept has title field
-                            );
-                          },
+                  return SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        SizedBox(
+                          height: 350.0,
+                          child: PageView.builder(
+                            controller: _pageController,
+                            itemCount: retsepts.length,
+                            itemBuilder: (context, index) {
+                              final retsept = retsepts[index];
+                              return CaruselItem(
+                                imagePath: retsept.image,
+                                title: retsept.name,
+                              );
+                            },
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 16.0),
-                      // Retseptlar ro'yxati
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: state.retsepts.length,
-                          itemBuilder: (ctx, index) {
-                            final retsept = state.retsepts[index];
-                            return ClassicVictoria(retsept: retsept);
-                          },
+                        const SizedBox(height: 16.0),
+                        // Retseptlar ro'yxati
+                        Container(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            children: [
+                              for (var retsept in retsepts)
+                                ClassicVictoria(retsept: retsept),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   );
                 }
-                return const Center(child: Text("Empty data"));
-
+                return const SliverFillRemaining(
+                  child: Center(child: Text("Empty data")),
+                );
               },
             ),
-          ),
+          ],
         ),
       ),
     );

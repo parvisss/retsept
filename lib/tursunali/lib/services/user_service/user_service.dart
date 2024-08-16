@@ -1,5 +1,6 @@
 import 'package:authentication_repository/authentication_repostory.dart';
 import 'package:dio/dio.dart';
+import 'package:retsept_cherno/data/models/user_model.dart';
 import 'package:user_repository/user_repostory.dart';
 
 class FirebaseUserService extends UserService {
@@ -12,35 +13,41 @@ class FirebaseUserService extends UserService {
     try {
       final response = await _dio.patch(
         "/users/$id.json",
-        data: data,
+        data: UserModel(
+            id: id,
+            rate: 1.1,
+            name: data!['name'],
+            email: data['email'],
+            password: data['password'],
+            saved: [],
+            favorites: [],
+            image: '',
+            favoriteMeal: [],
+            posts: []),
       );
 
       return Auth.fromMap(response.data);
     } on DioException catch (e) {
-      print("------------------------------------------------------");
-      print(e);
       throw (e.response?.data);
     } catch (e) {
-   
       rethrow;
     }
   }
 
-
   @override
   Future<User> getUser(String id) async {
-  try {
-    print('Fetching user with id: $id'); 
-    final response = await _dio.get("/users/$id.json");
-    final userMap = response.data;
-    userMap['id'] = id;
-    
-    return User.fromMap(userMap);
-  } on DioException catch (e) { // Debug print
-    throw (e.response?.data);
-  } catch (e) {  // Debug print
-    rethrow;
-  }
-}
+    try {
+      final response = await _dio.get("/users/$id.json");
+      final userMap = response.data;
+      userMap['id'] = id;
 
+      return User.fromMap(userMap);
+    } on DioException catch (e) {
+      // Debug print
+      throw (e.response?.data);
+    } catch (e) {
+      // Debug print
+      rethrow;
+    }
+  }
 }

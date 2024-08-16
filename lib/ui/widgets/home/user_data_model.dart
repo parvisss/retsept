@@ -25,7 +25,7 @@ class UserDataModel extends StatelessWidget {
                 const SizedBox(width: 8.0),
                 Text(
                   user.name,
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
                 const Spacer(),
                 Container(

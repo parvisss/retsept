@@ -8,7 +8,7 @@ import 'package:retsept_cherno/ui/screens/save_screen.dart';
 import 'package:retsept_cherno/ui/screens/search_screen.dart';
 
 class TabBoxScreen extends StatefulWidget {
-  const TabBoxScreen({Key? key}) : super(key: key);
+  const TabBoxScreen({super.key});
   @override
   State<TabBoxScreen> createState() => _TabBoxScreenState();
 }
@@ -21,10 +21,10 @@ class _TabBoxScreenState extends State<TabBoxScreen> {
   }
 
   final List<Widget> _screens = [
-    HomeScreen(),
-    AddNewScreen(),
-    SaveScreen(),
-    SearchScreen(),
+    const HomeScreen(),
+    const AddNewScreen(),
+    const SaveScreen(),
+    const SearchScreen(),
     ProfileScreen(null),
   ];
 

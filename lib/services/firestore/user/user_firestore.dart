@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retsept_cherno/data/models/user_model.dart';
+import 'package:retsept_cherno/tursunali/lib/services/auth_service.dart/authentication_service.dart';
 
 class UserFirestore {
   final String _baseUrl =
@@ -12,13 +13,9 @@ class UserFirestore {
       final Map<String, dynamic> userJson = user.toJson();
       final response = await _dio.post("$_baseUrl/users.json", data: userJson);
       if (response.statusCode == 200) {
-        print("User added successfully");
-      } else {
-        print("Failed to add user: ${response.statusCode}");
-      }
-    } catch (e) {
-      print("Error adding user: $e");
-    }
+      } else {}
+      // ignore: empty_catches
+    } catch (e) {}
   }
 
   //? Edit user data
@@ -28,31 +25,27 @@ class UserFirestore {
       final response =
           await _dio.put("$_baseUrl/users/${user.id}.json", data: userJson);
       if (response.statusCode == 200) {
-        print("User data updated successfully");
-      } else {
-        print("Failed to update user data: ${response.statusCode}");
-      }
-    } catch (e) {
-      print("Error updating user data: $e");
-    }
+      } else {}
+      // ignore: empty_catches
+    } catch (e) {}
   }
 
   //? Get user data
   Future<Map<String, dynamic>> getUserData() async {
-    final userId = 'iser1';
-
+    // final userId = await FirebaseAuthenticationService().getUserInfo();
+    print(1);
+    // String userRealId =
+    //     userId!['users'][0]['providerUserInfo']['federatedId'].toString();
+    // print(userRealId);
     try {
-      final response = await _dio.get("$_baseUrl/users/$userId.json");
+      final response = await _dio.get("$_baseUrl/users/iser1.json");
       if (response.statusCode == 200) {
         Map<String, dynamic> userData = response.data;
-        print("User data: $userData");
         return userData;
       }
 
-      print("Failed to get user data: ${response.statusCode}");
       return {};
     } catch (e) {
-      print("Error getting user data: $e");
       rethrow;
     }
   }
@@ -70,25 +63,21 @@ class UserFirestore {
         return users;
       }
 
-      print("Failed to get user data: ${response.statusCode}");
       return [];
     } catch (e) {
-      print("Error getting user data: $e");
       rethrow;
     }
   }
 
   //? Add global path of retsept to user's local retsepts
   Future<void> addRetseptToUserLocal(String globalPath) async {
-    final userId = '';
+    const userId = '';
     try {
       await _dio.post(
         "$_baseUrl/users/$userId/retsepts.json",
         data: {'globalPath': globalPath},
       );
-      print('Global path added to user local retsepts');
-    } catch (e) {
-      print('Error adding global path to user local retsepts: $e');
-    }
+      // ignore: empty_catches
+    } catch (e) {}
   }
 }

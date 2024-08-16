@@ -87,7 +87,7 @@ class StepperWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return EasyStepper(
       activeStep: activeStep,
-      steps: [
+      steps: const [
         EasyStep(icon: Icon(Icons.looks_one), title: 'Step 1'),
         EasyStep(icon: Icon(Icons.kitchen), title: 'Ingredients'),
         EasyStep(icon: Icon(Icons.list), title: 'Instructions'),
@@ -136,14 +136,14 @@ class InstructionInputCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 4.0),
+    return const Card(
+      margin: EdgeInsets.symmetric(vertical: 4.0),
       child: ListTile(
         leading: CircleAvatar(
           backgroundColor: Colors.orange,
-          child: const Icon(Icons.add, color: Colors.white),
+          child: Icon(Icons.add, color: Colors.white),
         ),
-        title: const TextField(
+        title: TextField(
           decoration: InputDecoration(
             hintText: 'Add new instruction...',
             border: InputBorder.none,
