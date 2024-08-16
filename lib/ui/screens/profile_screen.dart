@@ -5,13 +5,15 @@ import 'package:retsept_cherno/bloc/retsept/retsept_state.dart';
 import 'package:retsept_cherno/bloc/user/user_bloc.dart';
 import 'package:retsept_cherno/bloc/user/user_event.dart';
 import 'package:retsept_cherno/bloc/user/user_state.dart';
-import 'package:retsept_cherno/data/models/retsept_model.dart';
+import 'package:retsept_cherno/data/models/user_model.dart';
+import 'package:retsept_cherno/ui/widgets/home/custom_scroll_view_widget.dart';
 import 'package:retsept_cherno/ui/widgets/profile/followers_and_circle_avatar_following_widget.dart';
 import 'package:retsept_cherno/ui/widgets/search/build_recipe_card_widget.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen(this.user, {super.key});
+  UserModel? user;
 
   @override
   ProfileScreenState createState() => ProfileScreenState();
@@ -24,7 +26,9 @@ class ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    context.read<UserBloc>().add(LoadUserDataEvent());
+    if (widget.user == null) {
+      context.read<UserBloc>().add(LoadUserDataEvent());
+    }
     super.initState();
   }
 
@@ -38,7 +42,6 @@ class ProfileScreenState extends State<ProfileScreen> {
   void _shareProfile() {
     const String profileUrl = 'https://t.me/Flutter_with_Javohir';
     Share.share('Check out this amazing chef profile!\n$profileUrl');
-    Navigator.pushNamed(context, '/profile');
   }
 
   void _scrollToTop() {
@@ -54,15 +57,15 @@ class ProfileScreenState extends State<ProfileScreen> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        body: BlocBuilder<RetseptBloc, RetseptState>(
+        body: BlocBuilder<UserBloc, UserState>(
           builder: (context, state) {
-            if (state is RetseptLoading) {
+            if (state is UserLoading) {
               return const SliverFillRemaining(
                 child: Center(
                   child: CircularProgressIndicator(),
                 ),
               );
-            } else if (state is RetseptError) {
+            } else if (state is UserError) {
               return SliverFillRemaining(
                 child: Center(
                   child: Padding(
@@ -71,46 +74,69 @@ class ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               );
-            } else if (state is RetseptLoaded) {
-              final List<RetseptModel> retsepts = state.retsepts;
+            } else if (state is UserLoaded) {
+              // Ensure that posts and favorites are List<String>
+              List<String> posts = state.userData['posts']
+                  .map<String>((item) => item.toString())
+                  .toList();
+              List<String> favorites = state.userData['favorites']
+                  .map<String>((item) => item.toString())
+                  .toList();
+
               return CustomScrollView(
                 controller: _scrollController,
                 slivers: [
                   BlocBuilder<RetseptBloc, RetseptState>(
                     builder: (context, state) {
-                      return SliverAppBar(
-                        expandedHeight: 600,
-                        pinned: true,
-                        floating: false,
-                        actions: [
-                          IconButton(
-                            icon: const Icon(Icons.arrow_upward),
-                            onPressed: _scrollToTop,
-                          ),
-                        ],
-                        flexibleSpace: FlexibleSpaceBar(
-                          background: FollowersAndCircleAvatarFollowingWidget(
-                            isFollowing: isFollowing,
-                            followingCount: followingCount,
-                            toggleFollow: _toggleFollow,
-                            shareProfile: _shareProfile,
-                          ),
-                        ),
-                        bottom: const TabBar(
-                          labelColor: Colors.black,
-                          unselectedLabelColor: Colors.grey,
-                          labelStyle: TextStyle(
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          unselectedLabelStyle: TextStyle(
-                            fontSize: 14.0,
-                          ),
-                          tabs: [
-                            Tab(text: "Posts"),
-                            Tab(text: 'Favorites'),
+                      if (state is RetseptLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if (state is RetseptError) {
+                        return Center(
+                          child: Text(state.message),
+                        );
+                      }
+                      if (state is RetseptLoaded) {
+                        return SliverAppBar(
+                          expandedHeight: 600,
+                          pinned: true,
+                          floating: false,
+                          actions: [
+                            IconButton(
+                              icon: const Icon(Icons.arrow_upward),
+                              onPressed: _scrollToTop,
+                            ),
                           ],
-                        ),
+                          flexibleSpace: FlexibleSpaceBar(
+                            background: FollowersAndCircleAvatarFollowingWidget(
+                              widget.user,
+                              isFollowing: isFollowing,
+                              followingCount: followingCount,
+                              toggleFollow: _toggleFollow,
+                              shareProfile: _shareProfile,
+                            ),
+                          ),
+                          bottom: const TabBar(
+                            labelColor: Colors.black,
+                            unselectedLabelColor: Colors.grey,
+                            labelStyle: TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            unselectedLabelStyle: TextStyle(
+                              fontSize: 14.0,
+                            ),
+                            tabs: [
+                              Tab(text: "Posts"),
+                              Tab(text: 'Favorites'),
+                            ],
+                          ),
+                        );
+                      }
+                      return const Center(
+                        child: Text("Empty Data"),
                       );
                     },
                   ),
@@ -131,22 +157,39 @@ class ProfileScreenState extends State<ProfileScreen> {
                                   crossAxisSpacing: 16.0,
                                   mainAxisSpacing: 16.0,
                                 ),
-                                itemCount: 1,
+                                itemCount: posts.length,
                                 itemBuilder: (context, index) {
                                   return BuildRecipeCardWidget(
-                                    retsept: retsepts.first,
-                                  ); // Fixed imagePath parameter
+                                    retseptId: posts[index],
+                                  );
                                 },
                               ),
                             ),
                           ],
                         ),
-                        const Center(
-                          child: Text(
-                            "Less Details",
-                            style: TextStyle(
-                                fontSize: 24.0, fontWeight: FontWeight.bold),
-                          ),
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 120,
+                            ),
+                            Flexible(
+                              child: GridView.builder(
+                                padding: const EdgeInsets.all(16.0),
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 16.0,
+                                  mainAxisSpacing: 16.0,
+                                ),
+                                itemCount: favorites.length,
+                                itemBuilder: (context, index) {
+                                  return BuildRecipeCardWidget(
+                                    retseptId: favorites[index],
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

@@ -10,8 +10,10 @@ class FollowersAndCircleAvatarFollowingWidget extends StatelessWidget {
   final int followingCount;
   final VoidCallback toggleFollow;
   final VoidCallback shareProfile;
+  final UserModel? userData;
 
-  const FollowersAndCircleAvatarFollowingWidget({
+  const FollowersAndCircleAvatarFollowingWidget(
+    this.userData, {
     required this.isFollowing,
     required this.followingCount,
     required this.toggleFollow,
@@ -23,12 +25,22 @@ class FollowersAndCircleAvatarFollowingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
+        if (state is UserLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        if (state is UserError) {
+          return Center(
+            child: Text(state.message),
+          );
+        }
         if (state is UserLoaded) {
           UserModel user = UserModel.fromJson(state.userData);
           return Stack(
             children: [
               // Background image container with blur effect and fixed height
-              Container(
+              SizedBox(
                 height: 300.0, // Fixed height for the background image
                 child: Stack(
                   fit: StackFit.expand,
@@ -94,18 +106,11 @@ class FollowersAndCircleAvatarFollowingWidget extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 30),
-                    const Text(
-                      'Celina Damon',
-                      style: TextStyle(
+                    Text(
+                      user.name,
+                      style: const TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const Text(
-                      'Toronto, Canada',
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        color: Colors.grey,
                       ),
                     ),
                     const Padding(
@@ -156,7 +161,7 @@ class FollowersAndCircleAvatarFollowingWidget extends StatelessWidget {
               ),
               // Positioned rounded image
               Positioned(
-                top: 200.0 - 50, // Adjust based on your layout
+                top: 150.0, // Adjust based on your layout
                 left: MediaQuery.of(context).size.width / 2 - 75,
                 child: Container(
                   width: 150,
@@ -174,7 +179,7 @@ class FollowersAndCircleAvatarFollowingWidget extends StatelessWidget {
             ],
           );
         }
-        return const Center();
+        return const Center(); // Handle unexpected states
       },
     );
   }

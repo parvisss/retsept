@@ -89,4 +89,29 @@ class RetseptFirebase {
       return [];
     }
   }
+
+  //? Find a retsept by ID
+  Future<RetseptModel?> findRetseptById(String id) async {
+    try {
+      final response = await _dio.get("$_baseUrl/retsepts/$id.json");
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic>? data = response.data;
+
+        // Check if data is null or empty
+        if (data != null) {
+          return RetseptModel.fromJson(data);
+        } else {
+          print("Retsept with ID $id not found.");
+          return null;
+        }
+      } else {
+        print("Failed to fetch retsept: ${response.statusCode}");
+        return null;
+      }
+    } catch (e) {
+      print("Error fetching retsept by ID: $e");
+      return null;
+    }
+  }
 }

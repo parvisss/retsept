@@ -18,3 +18,5 @@ class AddUserEvent extends UserEvent {
 class FetchUserDataEvent extends UserEvent {}
 
 class LoadUserDataEvent extends UserEvent {}
+
+class LoadAllUsers extends UserEvent{}
