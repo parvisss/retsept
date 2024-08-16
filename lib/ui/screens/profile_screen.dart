@@ -99,6 +99,7 @@ class ProfileScreenState extends State<ProfileScreen> {
                       }
                       if (state is RetseptLoaded) {
                         return SliverAppBar(
+                          automaticallyImplyLeading: false,
                           expandedHeight: 600,
                           pinned: true,
                           floating: false,

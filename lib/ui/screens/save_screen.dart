@@ -29,6 +29,7 @@ class _SaveScreenState extends State<SaveScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           "Saved",
           style: TextStyle(color: Colors.white),
