@@ -22,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentPage = 0;
   Timer? _timer;
 
+
   @override
   void initState() {
     super.initState();
@@ -45,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
           curve: Curves.easeInOut,
         );
       }
+
     });
   }
 
@@ -52,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _pageController.dispose();
     _timer?.cancel();
+
     super.dispose();
   }
 
@@ -100,6 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 } else if (state is RetseptLoaded) {
                   return Column(
+
                     children: [
                       // CaruselItemlarni ko'rsatish
                       SizedBox(
@@ -134,6 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 }
                 return const Center(child: Text("Empty data"));
+
               },
             ),
           ),

@@ -15,6 +15,8 @@ class CaruselItem extends StatelessWidget {
     return Container(
       // Use the height parameter here
       margin: const EdgeInsets.all(5.0),
+      width: 350.0,
+      height: 350.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
         image: DecorationImage(
