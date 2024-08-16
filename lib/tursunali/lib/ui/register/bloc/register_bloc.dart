@@ -90,17 +90,17 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           email: state.email.value,
           password: state.password.value,
         );
-        await _userRepository.addUser(
-          auth.localId,
-          data: {
-            "email": auth.email,
-            "name": state.name,
-          },
-        );
+        await _userRepository.addUser(auth.localId, data: {
+          "email": auth.email,
+          "name": state.name.value,
+        });
         emit(state.copyWith(status: FormzSubmissionStatus.success));
       } catch (e) {
+        print("parviz");
+        print("------------");
         emit(state.copyWith(status: FormzSubmissionStatus.failure));
       }
+    
     }
   }
 }

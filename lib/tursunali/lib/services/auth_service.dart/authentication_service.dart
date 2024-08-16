@@ -19,7 +19,7 @@ class FirebaseAuthenticationService extends AuthenticationService {
         },
       );
       print(response.data);
-      return Auth.fromJson(response.data);
+      return Auth.fromMap(response.data);
     } on DioException catch (e) {
       throw (e.response?.data);
     } catch (e) {

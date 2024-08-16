@@ -75,7 +75,7 @@ class AuthenticationBloc
     return user;
   } catch (e) {
     print('Error occurred: $e');
-    return null;
+    return null; 
   }
 }
 }

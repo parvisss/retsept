@@ -50,7 +50,7 @@ class AuthenticationRepository {
     final auth = await _authenticationService.register(email, password);
     _authController.add(auth);
     _controller.add(AuthenticationStatus.authenticated);
-    
+
     LocalDb.saveToken(auth.idToken);
     return auth;
   }
@@ -60,7 +60,7 @@ class AuthenticationRepository {
     LocalDb.deleteToken();
   }
 
-   Future<Auth?> getAuthUser() async {
+  Future<Auth?> getAuthUser() async {
     final response = await _authenticationService.getUserInfo();
     if (response != null) {
       return Auth.fromList(response["users"], await LocalDb.getIdToken());

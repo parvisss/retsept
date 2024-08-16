@@ -15,7 +15,7 @@ class FirebaseUserService extends UserService {
         data: data,
       );
 
-      return Auth.fromJson(response.data);
+      return Auth.fromMap(response.data);
     } on DioException catch (e) {
       print("------------------------------------------------------");
       print(e);
@@ -29,7 +29,7 @@ class FirebaseUserService extends UserService {
   Future<UserModel> getUser(String id) async {
     try {
       print("____123______");
-      
+
       print('Fetching user with id: $id');
       final response = await _dio.get("/users/$id.json");
       print("ResponSE$response");
@@ -38,6 +38,7 @@ class FirebaseUserService extends UserService {
 
       return UserModel.fromJson(userMap);
     } on DioException catch (e) {
+      print("bir qancha");
       throw (e.response?.data);
     } catch (e) {
       rethrow;

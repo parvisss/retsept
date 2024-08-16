@@ -16,7 +16,7 @@ class UserRepository {
     return _user;
   }
 
-  Future<void> addUser(String id, {Map<String, dynamic>? data}) async {
+  Future<void> addUser(String id,  {Map<String, Object>? data}) async {
     await _userService.addUser(id, data: data);
   }
 }
