@@ -15,7 +15,7 @@ class UserLoaded extends UserState {
   final Map<String, dynamic> userData;
 
   const UserLoaded(this.userData);
-
+  
   @override
   List<Object> get props => [userData];
 }

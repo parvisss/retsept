@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retsept_cherno/data/models/retsept_model.dart';
-import 'package:retsept_cherno/services/firestore/user_firestore.dart';
+import 'package:retsept_cherno/services/firestore/user/user_firestore.dart';
 
 class RetseptFirebase {
   final String _baseUrl =

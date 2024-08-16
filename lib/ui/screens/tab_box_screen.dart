@@ -94,7 +94,8 @@ class _TabBoxScreenState extends State<TabBoxScreen> {
     HomeScreen(),
     AddNewScreen(),
     SaveScreen(),
-    SearchScreen(),
+    // SearchScreen(),
+    SaveScreen(),
     ProfileScreen(),
   ];
 

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:retsept_cherno/data/models/retsept_model.dart';
 import 'package:retsept_cherno/ui/widgets/search/build_recipe_card_widget.dart';
 
 class BuildGridViewWidget extends StatelessWidget {
   final String searchQuery;
+  final RetseptModel retsept;
 
-  BuildGridViewWidget({super.key, required this.searchQuery});
+  BuildGridViewWidget(
+      {super.key, required this.searchQuery, required this.retsept});
 
   final List<String> imagePaths = [
     'assets/food8.png',
@@ -31,8 +34,7 @@ class BuildGridViewWidget extends StatelessWidget {
       ),
       itemCount: filteredImages.length,
       itemBuilder: (context, index) {
-        return BuildRecipeCardWidget(
-            imagePath: filteredImages[index]); // Fixed imagePath parameter
+        return BuildRecipeCardWidget(retsept: retsept,); // Fixed imagePath parameter
       },
     );
   }
