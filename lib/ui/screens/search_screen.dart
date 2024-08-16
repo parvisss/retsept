@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
-import 'package:retsept_cherno/bloc/retsept/retsept_event.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_state.dart';
 import 'package:retsept_cherno/data/models/retsept_model.dart';
 import 'package:retsept_cherno/ui/widgets/search/build_chef_list_widget.dart';
@@ -11,9 +10,10 @@ import 'package:retsept_cherno/ui/widgets/search/build_tag_list_widget.dart';
 import 'package:retsept_cherno/ui/widgets/search/filtr_widget.dart';
 
 class SearchScreen extends StatefulWidget {
-  SearchScreen({super.key});
+  const SearchScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _SearchScreenState createState() => _SearchScreenState();
 }
 

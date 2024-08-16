@@ -20,15 +20,12 @@ class LikeRetsept {
         );
 
         if (updateResponse.statusCode == 200) {
-          print("Like granted!");
         } else {
-          print("Error: couldn't update the like count.");
         }
       } else {
-        print("Error: couldn't fetch the current like count.");
       }
+    // ignore: empty_catches
     } catch (e) {
-      print("Error on like: ($e)");
     }
   }
 

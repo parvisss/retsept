@@ -36,6 +36,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   flutter_secure_storage: ^4.2.1
   convex_bottom_bar: ^3.2.0
+  mocktail: ^1.0.4
 
 dev_dependencies:
   flutter_test:

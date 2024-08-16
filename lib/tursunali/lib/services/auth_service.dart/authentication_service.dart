@@ -18,7 +18,6 @@ class FirebaseAuthenticationService extends AuthenticationService {
           "returnSecureToken": true,
         },
       );
-      print(response.data);
       return Auth.fromMap(response.data);
     } on DioException catch (e) {
       throw (e.response?.data);
@@ -38,13 +37,10 @@ class FirebaseAuthenticationService extends AuthenticationService {
           "returnSecureToken": true,
         },
       );
-      print(response);
       return Auth.fromMap(response.data);
     } on DioException catch (e) {
-      print("Bu dio xatoligi: $e");
       throw (e.response?.data);
     } catch (e) {
-      print("Bu dio xatoligi: $e");
 
       rethrow;
     }
@@ -64,12 +60,10 @@ class FirebaseAuthenticationService extends AuthenticationService {
             'idToken': token,
           },
         );
-        print("Bu auth pakcagedagi getUserInfo response: $response");
         return response.data;
       }
       return null;
     } catch (e) {
-      print("GetUserInfo da Xatolik: $e");
       rethrow;
     }
   }

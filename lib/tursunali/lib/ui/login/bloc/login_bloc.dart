@@ -52,7 +52,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   ) async {
     if (state.isValid) {
       emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-      print("_____ASDFGNHffvfvvP");
       try {
         await _authenticationRepository.logIn(
           email: state.email.value,
@@ -60,9 +59,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         );
 
         emit(state.copyWith(status: FormzSubmissionStatus.success));
-        print("_e____ASDFGNHffvfvvP");
       } catch (_) {
-        print("___B__ASDFGNHffvfvvP");
         emit(state.copyWith(status: FormzSubmissionStatus.failure));
       }
     }

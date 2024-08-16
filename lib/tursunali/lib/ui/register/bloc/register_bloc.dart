@@ -36,7 +36,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         isValid: Formz.validate([email, state.password, state.confirmPassword]),
       ),
     );
-    
   }
 
   void _onPasswordChanged(
@@ -91,14 +90,15 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           password: state.password.value,
         );
         await _userRepository.addUser(auth.localId, data: {
+          'id': auth.localId,
           "email": auth.email,
           "name": state.name.value,
+          'password': state.password
         });
         emit(state.copyWith(status: FormzSubmissionStatus.success));
       } catch (e) {
         emit(state.copyWith(status: FormzSubmissionStatus.failure));
       }
-    
     }
   }
 }

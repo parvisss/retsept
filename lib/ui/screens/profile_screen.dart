@@ -6,6 +6,7 @@ import 'package:retsept_cherno/bloc/user/user_bloc.dart';
 import 'package:retsept_cherno/bloc/user/user_event.dart';
 import 'package:retsept_cherno/bloc/user/user_state.dart';
 import 'package:retsept_cherno/data/models/user_model.dart';
+import 'package:retsept_cherno/tursunali/lib/bloc/authentication/bloc/authentication_bloc.dart';
 import 'package:retsept_cherno/ui/widgets/profile/followers_and_circle_avatar_following_widget.dart';
 import 'package:retsept_cherno/ui/widgets/search/build_recipe_card_widget.dart';
 import 'package:share_plus/share_plus.dart';
@@ -50,6 +51,12 @@ class ProfileScreenState extends State<ProfileScreen> {
       duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
+  }
+
+  void _logout() {
+    // Handle logout logic here, such as clearing user data, navigating to login screen, etc.
+    // For example:
+    context.read<AuthenticationBloc>().add(AuthenticationLogoutPressed());
   }
 
   @override
@@ -107,6 +114,21 @@ class ProfileScreenState extends State<ProfileScreen> {
                             IconButton(
                               icon: const Icon(Icons.arrow_upward),
                               onPressed: _scrollToTop,
+                            ),
+                            PopupMenuButton<String>(
+                              onSelected: (value) {
+                                if (value == 'logout') {
+                                  _logout();
+                                }
+                              },
+                              itemBuilder: (BuildContext context) {
+                                return [
+                                  const PopupMenuItem<String>(
+                                    value: 'logout',
+                                    child: Text('Logout'),
+                                  ),
+                                ];
+                              },
                             ),
                           ],
                           flexibleSpace: FlexibleSpaceBar(

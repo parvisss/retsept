@@ -26,16 +26,12 @@ class SendComentService {
         );
 
         if (postResponse.statusCode == 200) {
-          print("Comment added successfully.");
           return resposeList.length;
         } else {
-          print("Failed to add comment.");
         }
       } else {
-        print("Failed to retrieve comments.");
       }
     } catch (e) {
-      print("Error: $e");
       rethrow;
     }
   }
