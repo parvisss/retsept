@@ -15,7 +15,7 @@ class FirebaseUserService extends UserService {
         data: data,
       );
 
-      return Auth.fromMap(response.data);
+      return Auth.fromJson(response.data);
     } on DioException catch (e) {
       print("------------------------------------------------------");
       print(e);
