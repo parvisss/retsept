@@ -6,6 +6,7 @@ import 'package:retsept_cherno/data/models/coment_model.dart';
 import 'package:retsept_cherno/data/models/retsept_model.dart';
 import 'package:retsept_cherno/ui/widgets/home/controller/coment_controller.dart';
 import 'package:retsept_cherno/ui/widgets/home/controller/like_controller.dart';
+import 'package:retsept_cherno/ui/widgets/home/user_data_model.dart';
 
 class RecipeCard extends StatefulWidget {
   const RecipeCard({super.key, required this.retsept});
@@ -38,7 +39,6 @@ class _RecipeCardState extends State<RecipeCard> {
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
-          // Recipe Image
           Stack(
             children: [
               ClipRRect(
@@ -114,42 +114,7 @@ class _RecipeCardState extends State<RecipeCard> {
           ),
           const SizedBox(height: 16.0),
           // Chef Information
-          Row(
-            children: [
-              const CircleAvatar(
-                backgroundImage: AssetImage(
-                    'assets/chef2.png'), // Replace with your actual image asset
-                radius: 20.0,
-              ),
-              const SizedBox(width: 8.0),
-              const Text(
-                'Kelly Mayer',
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-              ),
-              const Spacer(),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
-                decoration: BoxDecoration(
-                  color: Colors.yellow,
-                  borderRadius: BorderRadius.circular(4.0),
-                ),
-                child: const Row(
-                  children: [
-                    Icon(Icons.star, color: Colors.black, size: 12.0),
-                    SizedBox(width: 4.0),
-                    Text(
-                      '4.8',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+          const UserDataModel(),
           const SizedBox(height: 16.0),
           // Recipe Title
           Container(
@@ -193,7 +158,7 @@ class _RecipeCardState extends State<RecipeCard> {
             length: 3,
             child: Column(
               children: [
-                const TabBar( 
+                const TabBar(
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.grey,
                   tabs: [

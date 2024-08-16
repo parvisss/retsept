@@ -57,6 +57,27 @@ class UserFirestore {
     }
   }
 
+  Future<List<UserModel>> getUsers() async {
+    try {
+      final response = await _dio.get("$_baseUrl/users.json");
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = response.data;
+        final users = data.entries.map((entry) {
+          final retseptData = entry.value as Map<String, dynamic>;
+          return UserModel.fromJson(retseptData);
+        }).toList();
+        return users;
+      }
+
+      print("Failed to get user data: ${response.statusCode}");
+      return [];
+    } catch (e) {
+      print("Error getting user data: $e");
+      rethrow;
+    }
+  }
+
   //? Add global path of retsept to user's local retsepts
   Future<void> addRetseptToUserLocal(String globalPath) async {
     final userId = '';
