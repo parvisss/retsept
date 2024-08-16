@@ -91,7 +91,7 @@ class _AppViewState extends State<AppView> {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        '/profile': (context) => ProfileScreen(), // Profil sahifasi
+        '/profile': (context) => ProfileScreen(null), // Profil sahifasi
       },
       debugShowCheckedModeBanner: false,
       navigatorKey: _navigatorKey,

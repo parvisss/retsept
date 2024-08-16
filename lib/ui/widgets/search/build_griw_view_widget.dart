@@ -34,7 +34,9 @@ class BuildGridViewWidget extends StatelessWidget {
       ),
       itemCount: filteredImages.length,
       itemBuilder: (context, index) {
-        return BuildRecipeCardWidget(retsept: retsept,); // Fixed imagePath parameter
+        return BuildRecipeCardWidget(
+          retseptId: retsept.id,
+        ); // Fixed imagePath parameter
       },
     );
   }

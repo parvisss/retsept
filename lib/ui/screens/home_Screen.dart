@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_bloc.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_event.dart';
 import 'package:retsept_cherno/bloc/retsept/retsept_state.dart';
+import 'package:retsept_cherno/bloc/user/user_bloc.dart';
+import 'package:retsept_cherno/bloc/user/user_event.dart';
 import 'package:retsept_cherno/services/firestore/retsept/retsept_firebase.dart';
 import 'package:retsept_cherno/ui/widgets/home/classic_victoria.dart';
 
@@ -14,15 +16,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<String> imageList = [
-    'assets/food2.png',
-    'assets/food3.png',
-    'assets/food4.png',
-    'assets/food5.png',
-  ];
   @override
   void initState() {
     context.read<RetseptBloc>().add(LoadRetsepts());
+    context.read<UserBloc>().add(LoadUserDataEvent());
 
     super.initState();
   }
@@ -72,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               }
               return const Center(
-                child: CircularProgressIndicator(),
+                child: Text("Empty data"),
               );
             }),
           ),
